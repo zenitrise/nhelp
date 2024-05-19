@@ -357,7 +357,6 @@ local con_window_state = imgui.ImBool(false)
 local tg_settings_window_state = imgui.ImBool(false)
 local rlavka_settings_window_state = imgui.ImBool(false)
 local bank_settings_window_state = imgui.ImBool(false)
-local active_lavka = imgui.ImBool(mainIni.lavki.toggle)
 
 local addspawn_toggle = imgui.ImBool(mainIni.addspawn.toggle)
 local addspawn_id = imgui.ImInt(mainIni.addspawn.id)
@@ -376,6 +375,7 @@ local lavka_toggle = imgui.ImBool(mainIni.lavka.toggle)
 local bank_toggle = imgui.ImBool(mainIni.bank.toggle)
 local bank_pin = imgui.ImInt(mainIni.bank.pin)
 local anti_stock = imgui.ImBool(mainIni.stock.toggle)
+local active_lavka = imgui.ImBool(mainIni.lavk.toggle)
 
 local autoreconnect_toggle = imgui.ImBool(mainIni.autoreconnect.toggle)
 local autoreconnect_min = imgui.ImInt(mainIni.autoreconnect.min)
@@ -952,10 +952,6 @@ function imgui.OnDrawFrame()
         imgui.SameLine()
         imgui.Text(u8'Скутер новичка')
 
-        imadd.ToggleButton('##7326', active_lavka)
-        imgui.SameLine()
-        imgui.Text(u8'Поиск лавок')
-
         imgui.EndChild()
         imgui.End()
 
@@ -1191,6 +1187,10 @@ function imgui.OnDrawFrame()
             if imgui.Button(fa.ICON_FA_COGS .. "##2281733") then
                 rlavka_settings_window_state.v = not rlavka_settings_window_state.v 
             end
+
+            imadd.ToggleButton('##7326', active_lavka)
+            imgui.SameLine()
+            imgui.Text(u8'Поиск лавок')
 
             imadd.ToggleButton("##22312", anti_stock)
             imgui.SameLine()
@@ -1553,7 +1553,7 @@ function savecfg()
     mainIni.bank.toggle = bank_toggle.v
 
     mainIni.stock.toggle = anti_stock.v
-    mainIni.lavki.toggle = active_lavka.v
+    mainIni.lavk.toggle = active_lavka.v
     mainIni.rlavka.toggle = rlavka_toggle.v
     mainIni.rlavka.radius = rlavka_radius.v
 
