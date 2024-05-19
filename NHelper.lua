@@ -16,31 +16,31 @@ local dlstatus = require("moonloader").download_status
 local update_status = false
 local download_lib = false
 
-local update_url = "https://github.com/zenitrise/nhelp/blob/main/update.ini"
+local update_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
 
-local script_url = "https://github.com/zenitrise/nhelp/blob/main/NHelper.lua"
+local script_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/NHelper.lua"
 local script_path = thisScript().path
 
-local fa5_url ="https://github.com/zenitrise/nhelp/blob/main/fAwesome5.lua"
+local fa5_url ="https://raw.githubusercontent.com/zenitrise/nhelp/main/fAwesome5.lua"
 local fa5_path = "moonloader/lib/fAwesome5.lua"
 
 local font_url = "https://github.com/zenitrise/nhelp/blob/main/fa-solid-900.ttf"
 local font_path = "moonloader/resource/fonts/fa-solid-900.ttf"
 
-local encoding_url = "https://github.com/zenitrise/nhelp/blob/main/encoding.lua"
+local encoding_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/encoding.lua"
 local encoding_path = "moonloader/lib/encoding.lua"
 
-local imgui_url = "https://github.com/zenitrise/nhelp/blob/main/imgui.lua"
+local imgui_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/imgui.lua"
 local imgui_path =  "moonloader/lib/imgui.lua"
 
-local imguiadd_url = "https://github.com/zenitrise/nhelp/blob/main/imgui_addons.lua"
+local imguiadd_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/imgui_addons.lua"
 local imguiadd_path =  "moonloader/lib/imgui_addons.lua"
 
-local rkeys_url = "https://github.com/zenitrise/nhelp/blob/main/rkeys.lua"
+local rkeys_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/rkeys.lua"
 local rkeys_path = "moonloader/lib/rkeys.lua"
 
-local vkeys_url = "https://github.com/zenitrise/nhelp/blob/main/vkeys.lua"
+local vkeys_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/vkeys.lua"
 local vkeys_path = "moonloader/lib/vkeys.lua"
 ----------- Подгрузка библиотек и дерикторий ---------
 
