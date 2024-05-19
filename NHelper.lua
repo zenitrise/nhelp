@@ -1110,7 +1110,7 @@ function imgui.OnDrawFrame()
 
         imgui.SetCursorPos(imgui.ImVec2(10, 195))
         imgui.Separator()
-        imgui.Text(u8"Автор: "Zenitrise)
+        imgui.Text(u8"Автор: Zenitrise")
         imgui.Text(u8"Версия: " .. script_vers_text)
 
         imgui.SetCursorPos(imgui.ImVec2(75, 215))
