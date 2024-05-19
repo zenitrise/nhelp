@@ -10,11 +10,11 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 29
-local script_vers_text = "3.9"
+local script_vers = 28
+local script_vers_text = "3.8"
 local dlstatus = require("moonloader").download_status
-local update_status = false
-local download_lib = false
+local update_status = true
+local download_lib = true
 
 local update_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
