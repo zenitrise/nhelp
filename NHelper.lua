@@ -357,6 +357,7 @@ local con_window_state = imgui.ImBool(false)
 local tg_settings_window_state = imgui.ImBool(false)
 local rlavka_settings_window_state = imgui.ImBool(false)
 local bank_settings_window_state = imgui.ImBool(false)
+local active_lavka = imgui.ImBool.ImBool(false)
 
 local addspawn_toggle = imgui.ImBool(mainIni.addspawn.toggle)
 local addspawn_id = imgui.ImInt(mainIni.addspawn.id)
@@ -383,7 +384,6 @@ local autoreconnect_dont_reconnect = imgui.ImBool(mainIni.autoreconnect.dont_rec
 local autoreconnect_dont_reconnect_hour_first = imgui.ImInt(mainIni.autoreconnect.dont_reconnect_hour_first)
 local autoreconnect_dont_reconnect_hour_second = imgui.ImInt(mainIni.autoreconnect.dont_reconnect_hour_second)
 
-local active_lavka = imgui.ImBool(mainIni.render.lavka)
 local lavki = {}
 
 -------
@@ -443,8 +443,7 @@ function main()
     theme()
     while true do 
         wait(0)
-        -- Denis Function
-
+--------- Поиск лавок
         if active_lavka.v then
             local input = sampGetInputInfoPtr()
             local input = getStructElement(input, 0x8, 4)
@@ -455,26 +454,21 @@ function main()
             for v = 1, #lavki do
                 
                 if doesObjectExist(lavki[v]) then
-                    local result, obX, obY, obZ = getObjectCoordinates(lavki[v])
+                    local result, posX, posY, posZ = getObjectCoordinates(lavki[v])
                     local x, y, z = getCharCoordinates(PLAYER_PED)
                     
                     if result then
-                        local ObjX, ObjY = convert3DCoordsToScreen(obX, obY, obZ)
-                        local myX, myY = convert3DCoordsToScreen(x, y, z)
-
-                        if isObjectOnScreen(lavki[v]) then
-                            renderDrawLine(ObjX, ObjY, myX, myY, 1, 0xFF52FF4D)
-                            renderDrawPolygon(myX, myY, 10, 10, 10, 0, 0xFFFFFFFF)
-                            renderDrawPolygon(ObjX, ObjY, 10, 10, 10, 0, 0xFFFFFFFF)
-                            renderFontDrawText(font, 'Свободна', ObjX - 30, ObjY - 20, 0xFF16C910, 0x90000000)
+                        local pX, pY = convert3DCoordsToScreen(getCharCoordinates(PLAYER_PED))
+                        local lX, lY = convert3DCoordsToScreen(posX, posY, posZ)
+                        renderFontDrawText(font, 'Свободна', lX - 30, lY - 20, 0xFF16C910, 0x90000000)
+                        renderDrawLine(pX, pY, lX, lY, 1, 0xFF52FF4D)
+                        renderDrawPolygon(pX, pY, 10, 10, 10, 0, 0xFFFFFFFF)
+                        renderDrawPolygon(lX, lY, 10, 10, 10, 0, 0xFFFFFFFF)
                         end
                     end
                 end
             end
         end
-
-
-
         --- сундуки
         if box_toggle.v and not work then
             work = true
@@ -960,7 +954,7 @@ function imgui.OnDrawFrame()
 
         imadd.ToggleButton('##7326', active_lavka)
         imgui.SameLine()
-        imgui.Text(u8'Функция Данияра')
+        imgui.Text(u8'Поиск лавок')
 
         imgui.EndChild()
         imgui.End()
@@ -1562,8 +1556,6 @@ function savecfg()
 
     mainIni.rlavka.toggle = rlavka_toggle.v
     mainIni.rlavka.radius = rlavka_radius.v
-
-    mainIni.render.lavka = active_lavka.v
 
     inicfg.save(mainIni, directIni)
 
