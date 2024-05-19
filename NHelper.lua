@@ -1110,7 +1110,7 @@ function imgui.OnDrawFrame()
 
         imgui.SetCursorPos(imgui.ImVec2(10, 195))
         imgui.Separator()
-        imgui.Text(u8"Автор: Zenitrise")
+        imgui.Text(u8"Автор: Azenizzka")
         imgui.Text(u8"Версия: " .. script_vers_text)
 
         imgui.SetCursorPos(imgui.ImVec2(75, 215))
@@ -1404,7 +1404,7 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
         end
     end
 
-    if id == 25530 then
+    if id == 25526 then
         if addspawn_toggle.v then
             if addspawn_waittoggle.v then
                 lua_thread.create(function()
@@ -1412,11 +1412,11 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
                     time = addspawn_wait.v * 1000
                     wait(time)
                     sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
-                    sampSendDialogResponse(25530, 1, a, _)
+                    sampSendDialogResponse(25526, 1, a, _)
                 end)
             elseif not addspawn_waittoggle.v then 
                 local a = addspawn_id.v-1
-                sampSendDialogResponse(25530, 1, a, _)
+                sampSendDialogResponse(25526, 1, a, _)
                 sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
             end
         end
