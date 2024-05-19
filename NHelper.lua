@@ -1,5 +1,5 @@
 script_name("N Helper")
-script_author("Azenizzka")
+script_author("zenitrise")
 
 ---------- Пермиенные для текста -----------
 
@@ -10,37 +10,37 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 27
-local script_vers_text = "3.7"
+local script_vers = 28
+local script_vers_text = "3.8"
 local dlstatus = require("moonloader").download_status
-local update_status = false
-local download_lib = false
+local update_status = true
+local download_lib = true
 
-local update_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/update.ini"
+local update_url = "https://github.com/zenitrise/nhelp/blob/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
 
-local script_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/NHelper.lua"
+local script_url = "https://github.com/zenitrise/nhelp/blob/main/NHelper.lua"
 local script_path = thisScript().path
 
-local fa5_url ="https://raw.githubusercontent.com/Azenizzka/NHelper/main/fAwesome5.lua"
+local fa5_url ="https://github.com/zenitrise/nhelp/blob/main/fAwesome5.lua"
 local fa5_path = "moonloader/lib/fAwesome5.lua"
 
-local font_url = "https://github.com/Azenizzka/NHelper/blob/main/fa-solid-900.ttf?raw=true"
+local font_url = "https://github.com/zenitrise/nhelp/blob/main/fa-solid-900.ttf"
 local font_path = "moonloader/resource/fonts/fa-solid-900.ttf"
 
-local encoding_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/encoding.lua"
+local encoding_url = "https://github.com/zenitrise/nhelp/blob/main/encoding.lua"
 local encoding_path = "moonloader/lib/encoding.lua"
 
-local imgui_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/imgui.lua"
+local imgui_url = "https://github.com/zenitrise/nhelp/blob/main/imgui.lua"
 local imgui_path =  "moonloader/lib/imgui.lua"
 
-local imguiadd_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/imgui_addons.lua"
+local imguiadd_url = "https://github.com/zenitrise/nhelp/blob/main/imgui_addons.lua"
 local imguiadd_path =  "moonloader/lib/imgui_addons.lua"
 
-local rkeys_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/rkeys.lua"
+local rkeys_url = "https://github.com/zenitrise/nhelp/blob/main/rkeys.lua"
 local rkeys_path = "moonloader/lib/rkeys.lua"
 
-local vkeys_url = "https://github.com/Azenizzka/NHelper/blob/main/vkeys.lua"
+local vkeys_url = "https://github.com/zenitrise/nhelp/blob/main/vkeys.lua"
 local vkeys_path = "moonloader/lib/vkeys.lua"
 ----------- Подгрузка библиотек и дерикторий ---------
 
@@ -412,7 +412,7 @@ function main()
                 update_status = true
             elseif tonumber(updateIni.update.vers) == script_vers then
                 sampAddChatMessage(tag .. textcolor .. "Скрипт успешно загружен, обновлений не обнаружено!", tagcolor)
-                sampAddChatMessage(tag .. textcolor .. "Автор скрипта: " .. warncolor .. "Azenizzka" .. textcolor .. ".", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "Автор скрипта: " .. warncolor .. "Zenitrise" .. textcolor .. ".", tagcolor)
                 sampAddChatMessage(tag .. textcolor .. "Активация скрипта: " .. warncolor .. "/nhelp " .. textcolor .. "или " .. warncolor .. table.concat(rkeys.getKeysName(main_window.v), " + ") , tagcolor)
             end
             os.remove(update_path)
