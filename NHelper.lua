@@ -10,8 +10,8 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 28
-local script_vers_text = "3.8"
+local script_vers = 29
+local script_vers_text = "3.9"
 local dlstatus = require("moonloader").download_status
 local update_status = false
 local download_lib = false
@@ -145,7 +145,8 @@ local mainIni = inicfg.load({
         box = false,
         cr = false,
         disconnect = false,
-        payday = false
+        payday = false,
+        perevod = false
     },
     box = {
         toggle = false,
@@ -161,7 +162,6 @@ local mainIni = inicfg.load({
     },
     render = {
         toggle = false,
-        lavka = false,
         custom = false,
         customid = 1337,
         customname = "Own ID",
@@ -209,8 +209,11 @@ local mainIni = inicfg.load({
         toggle = false,
         pin = 123456
     },
+    lavk = {
+        toggle = false,
+    },
     stock = {
-        toggle = false
+        toggle = false,
     },
     con = {
         server = 1,
@@ -249,6 +252,7 @@ local chat_id = imgui.ImBuffer(tostring(mainIni.tg.id), 512)
 local updateid -- ID последнего сообщения для того чтобы не было флуда
 local tg_box = imgui.ImBool(mainIni.tg.box)
 local tg_cr = imgui.ImBool(mainIni.tg.cr)
+local tg_perevod = imgui.ImBool(mainIni.tg.perevod)
 local tg_disconnect = imgui.ImBool(mainIni.tg.disconnect)
 local tg_payday = imgui.ImBool(mainIni.tg.payday)
 local tgpd = {"========== Pay Day ==========", " "}
@@ -374,6 +378,7 @@ local lavka_toggle = imgui.ImBool(mainIni.lavka.toggle)
 
 local bank_toggle = imgui.ImBool(mainIni.bank.toggle)
 local bank_pin = imgui.ImInt(mainIni.bank.pin)
+local active_lavka = imgui.ImBool(mainIni.lavk.toggle)
 local anti_stock = imgui.ImBool(mainIni.stock.toggle)
 
 local autoreconnect_toggle = imgui.ImBool(mainIni.autoreconnect.toggle)
@@ -383,7 +388,6 @@ local autoreconnect_dont_reconnect = imgui.ImBool(mainIni.autoreconnect.dont_rec
 local autoreconnect_dont_reconnect_hour_first = imgui.ImInt(mainIni.autoreconnect.dont_reconnect_hour_first)
 local autoreconnect_dont_reconnect_hour_second = imgui.ImInt(mainIni.autoreconnect.dont_reconnect_hour_second)
 
-local active_lavka = imgui.ImBool(mainIni.render.lavka)
 local lavki = {}
 
 -------
@@ -443,35 +447,33 @@ function main()
     theme()
     while true do 
         wait(0)
-        -- Denis Function
+        -- Поиск лавок
 
         if active_lavka.v then
-            local input = sampGetInputInfoPtr()
-            local input = getStructElement(input, 0x8, 4)
-            local PosX = getStructElement(input, 0x8, 4)
-            local PosY = getStructElement(input, 0xC, 4)
-            renderFontDrawText(font, 'Свободно лавок: '..#lavki, PosX, PosY + 80, 0xFFFFFFFF, 0x90000000)
-            
-            for v = 1, #lavki do
-                
-                if doesObjectExist(lavki[v]) then
-                    local result, obX, obY, obZ = getObjectCoordinates(lavki[v])
-                    local x, y, z = getCharCoordinates(PLAYER_PED)
-                    
-                    if result then
-                        local ObjX, ObjY = convert3DCoordsToScreen(obX, obY, obZ)
-                        local myX, myY = convert3DCoordsToScreen(x, y, z)
-
-                        if isObjectOnScreen(lavki[v]) then
-                            renderDrawLine(ObjX, ObjY, myX, myY, 1, 0xFF52FF4D)
-                            renderDrawPolygon(myX, myY, 10, 10, 10, 0, 0xFFFFFFFF)
-                            renderDrawPolygon(ObjX, ObjY, 10, 10, 10, 0, 0xFFFFFFFF)
-                            renderFontDrawText(font, 'Свободна', ObjX - 30, ObjY - 20, 0xFF16C910, 0x90000000)
+            local lavki = 0
+            for id = 0, 2304 do
+                if sampIs3dTextDefined(id) then
+                    local text, _, posX, posY, posZ, _, _, _, _ = sampGet3dTextInfoById(id)
+                    if (math.floor(posZ) == 17 or math.floor(posZ) == 1820) and text == '' then
+                        lavki = lavki + 1
+                        if isPointOnScreen(posX, posY, posZ, nil) then
+                            local pX, pY = convert3DCoordsToScreen(getCharCoordinates(PLAYER_PED))
+                            local lX, lY = convert3DCoordsToScreen(posX, posY, posZ)
+                            renderFontDrawText(font, 'Свободна', lX - 30, lY - 20, 0xFF16C910, 0x90000000)
+                            renderDrawLine(pX, pY, lX, lY, 1, 0xFF52FF4D)
+                            renderDrawPolygon(pX, pY, 10, 10, 10, 0, 0xFFFFFFFF)
+                            renderDrawPolygon(lX, lY, 10, 10, 10, 0, 0xFFFFFFFF)
                         end
                     end
                 end
             end
+            local input = sampGetInputInfoPtr()
+            local input = getStructElement(input, 0x8, 4)
+            local PosX = getStructElement(input, 0x8, 4)
+            local PosY = getStructElement(input, 0xC, 4)
+            renderFontDrawText(font, 'Свободно лавок: '..lavki, PosX, PosY + 80, 0xFFFFFFFF, 0x90000000)
         end
+    
 
 
 
@@ -632,11 +634,11 @@ end
 
 function tg_settings()
     savecfg()
-    imgui.SetNextWindowSize(imgui.ImVec2(450, 225), imgui.Cond.FirstUseEver)
+    imgui.SetNextWindowSize(imgui.ImVec2(450, 240), imgui.Cond.FirstUseEver)
     imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
     imgui.Begin(u8"Настройки Telegram", tg_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-    imgui.BeginChild('##61', imgui.ImVec2(435, 190), false)
+    imgui.BeginChild('##61', imgui.ImVec2(435, 230), false)
 
     imgui.PushItemWidth(340)
     imgui.InputText("Bot Token", token)
@@ -650,6 +652,10 @@ function tg_settings()
     imgui.Separator()
     imgui.Text(u8"Уведомления:")
     imgui.Separator()
+
+    imadd.ToggleButton("##66", tg_perevod)
+    imgui.SameLine()
+    imgui.Text(u8"Переводы")
 
     imadd.ToggleButton("##62", tg_box)
     imgui.SameLine()
@@ -914,11 +920,11 @@ function imgui.OnDrawFrame()
 --------- Настройки рендера 
     if render_settings_window_state.v then
 
-        imgui.SetNextWindowSize(imgui.ImVec2(220, 175), imgui.Cond.FirstUseEver)
+        imgui.SetNextWindowSize(imgui.ImVec2(220, 150), imgui.Cond.FirstUseEver)
         imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
         imgui.Begin(u8"Настройки рендера", render_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-        imgui.BeginChild('##27', imgui.ImVec2(205, 140), false)
+        imgui.BeginChild('##27', imgui.ImVec2(205, 120), false)
 
         imadd.ToggleButton("##28", render_line)
         imgui.SameLine()
@@ -957,10 +963,6 @@ function imgui.OnDrawFrame()
         imadd.ToggleButton('##58', render_skuter)
         imgui.SameLine()
         imgui.Text(u8'Скутер новичка')
-
-        imadd.ToggleButton('##7326', active_lavka)
-        imgui.SameLine()
-        imgui.Text(u8'Функция Данияра')
 
         imgui.EndChild()
         imgui.End()
@@ -1198,6 +1200,10 @@ function imgui.OnDrawFrame()
                 rlavka_settings_window_state.v = not rlavka_settings_window_state.v 
             end
 
+            imadd.ToggleButton('##7326', active_lavka)
+            imgui.SameLine()
+            imgui.Text(u8'Поиск лавок')
+
             imadd.ToggleButton("##22312", anti_stock)
             imgui.SameLine()
             imgui.Text(u8"Анти-Диалог с акциями")
@@ -1334,6 +1340,12 @@ function sampev.onServerMessage(color, text)
         end
     end
 
+    if tg_toggle.v and tg_perevod.v then
+        if text:find("Вам поступил перевод") then
+            sendTelegramNotification(tag .. text)
+        end
+    end
+
     if tg_toggle.v and tg_payday.v then
         if text:find("Организационная зарплата:") then
             table.insert(tgpd, text)
@@ -1404,7 +1416,7 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
         end
     end
 
-    if id == 25530 then
+    if id == 25526 then
         if addspawn_toggle.v then
             if addspawn_waittoggle.v then
                 lua_thread.create(function()
@@ -1412,11 +1424,11 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
                     time = addspawn_wait.v * 1000
                     wait(time)
                     sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
-                    sampSendDialogResponse(25530, 1, a, _)
+                    sampSendDialogResponse(25526, 1, a, _)
                 end)
             elseif not addspawn_waittoggle.v then 
                 local a = addspawn_id.v-1
-                sampSendDialogResponse(25530, 1, a, _)
+                sampSendDialogResponse(25526, 1, a, _)
                 sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
             end
         end
@@ -1495,6 +1507,14 @@ end
 
 ------ Сохранение
 function savecfg()
+    cfg_part_1()
+    cfg_part_2()
+
+    inicfg.save(mainIni, directIni)
+
+end
+
+function cfg_part_1()
     mainIni.hotkey.main_window = encodeJson(main_window.v)
     mainIni.hotkey.toggle = hotkey_toggle.v
 
@@ -1504,6 +1524,7 @@ function savecfg()
     mainIni.tg.box = tg_box.v
     mainIni.tg.cr = tg_cr.v
     mainIni.tg.disconnect = tg_disconnect.v
+    mainIni.tg.perevod = tg_perevod.v
     mainIni.tg.payday = tg_payday.v
 
     mainIni.con.server = con_server.v
@@ -1523,6 +1544,9 @@ function savecfg()
     mainIni.box.open_delay_min = box_open_delay_min.v
     mainIni.box.open_delay_max = box_open_delay_max.v
 
+end
+
+function cfg_part_2()
     mainIni.render.toggle = render_toggle.v
     mainIni.render.line = render_line.v
     mainIni.render.text = render_text.v
@@ -1557,16 +1581,11 @@ function savecfg()
 
     mainIni.bank.pin = bank_pin.v
     mainIni.bank.toggle = bank_toggle.v
-
+    mainIni.lavk.toggle = active_lavka.v
     mainIni.stock.toggle = anti_stock.v
 
     mainIni.rlavka.toggle = rlavka_toggle.v
     mainIni.rlavka.radius = rlavka_radius.v
-
-    mainIni.render.lavka = active_lavka.v
-
-    inicfg.save(mainIni, directIni)
-
 end
 
 function phone_nalog()
