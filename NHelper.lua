@@ -357,7 +357,7 @@ local con_window_state = imgui.ImBool(false)
 local tg_settings_window_state = imgui.ImBool(false)
 local rlavka_settings_window_state = imgui.ImBool(false)
 local bank_settings_window_state = imgui.ImBool(false)
-local active_lavka = imgui.ImBool.ImBool(false)
+local active_lavka = imgui.ImBool(mainIni.lavki.toggle)
 
 local addspawn_toggle = imgui.ImBool(mainIni.addspawn.toggle)
 local addspawn_id = imgui.ImInt(mainIni.addspawn.id)
@@ -1553,7 +1553,7 @@ function savecfg()
     mainIni.bank.toggle = bank_toggle.v
 
     mainIni.stock.toggle = anti_stock.v
-
+    mainIni.lavki.toggle = active_lavka.v
     mainIni.rlavka.toggle = rlavka_toggle.v
     mainIni.rlavka.radius = rlavka_radius.v
 
