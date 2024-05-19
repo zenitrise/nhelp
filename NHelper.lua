@@ -1,5 +1,5 @@
 script_name("N Helper")
-script_author("zenitrise")
+script_author("Azenizzka")
 
 ---------- Пермиенные для текста -----------
 
@@ -10,37 +10,37 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 29
-local script_vers_text = "3.9"
+local script_vers = 27
+local script_vers_text = "3.7"
 local dlstatus = require("moonloader").download_status
 local update_status = false
 local download_lib = false
 
-local update_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/update.ini"
+local update_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/update.ini"
 local update_path = getWorkingDirectory() .. "/update.ini"
 
-local script_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/NHelper.lua"
+local script_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/NHelper.lua"
 local script_path = thisScript().path
 
-local fa5_url ="https://raw.githubusercontent.com/zenitrise/nhelp/main/fAwesome5.lua"
+local fa5_url ="https://raw.githubusercontent.com/Azenizzka/NHelper/main/fAwesome5.lua"
 local fa5_path = "moonloader/lib/fAwesome5.lua"
 
-local font_url = "https://github.com/zenitrise/nhelp/blob/main/fa-solid-900.ttf"
+local font_url = "https://github.com/Azenizzka/NHelper/blob/main/fa-solid-900.ttf?raw=true"
 local font_path = "moonloader/resource/fonts/fa-solid-900.ttf"
 
-local encoding_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/encoding.lua"
+local encoding_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/encoding.lua"
 local encoding_path = "moonloader/lib/encoding.lua"
 
-local imgui_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/imgui.lua"
+local imgui_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/imgui.lua"
 local imgui_path =  "moonloader/lib/imgui.lua"
 
-local imguiadd_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/imgui_addons.lua"
+local imguiadd_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/imgui_addons.lua"
 local imguiadd_path =  "moonloader/lib/imgui_addons.lua"
 
-local rkeys_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/rkeys.lua"
+local rkeys_url = "https://raw.githubusercontent.com/Azenizzka/NHelper/main/rkeys.lua"
 local rkeys_path = "moonloader/lib/rkeys.lua"
 
-local vkeys_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/vkeys.lua"
+local vkeys_url = "https://github.com/Azenizzka/NHelper/blob/main/vkeys.lua"
 local vkeys_path = "moonloader/lib/vkeys.lua"
 ----------- Подгрузка библиотек и дерикторий ---------
 
@@ -375,7 +375,6 @@ local lavka_toggle = imgui.ImBool(mainIni.lavka.toggle)
 local bank_toggle = imgui.ImBool(mainIni.bank.toggle)
 local bank_pin = imgui.ImInt(mainIni.bank.pin)
 local anti_stock = imgui.ImBool(mainIni.stock.toggle)
-local active_lavka = imgui.ImBool(mainIni.lavk.toggle)
 
 local autoreconnect_toggle = imgui.ImBool(mainIni.autoreconnect.toggle)
 local autoreconnect_min = imgui.ImInt(mainIni.autoreconnect.min)
@@ -384,6 +383,7 @@ local autoreconnect_dont_reconnect = imgui.ImBool(mainIni.autoreconnect.dont_rec
 local autoreconnect_dont_reconnect_hour_first = imgui.ImInt(mainIni.autoreconnect.dont_reconnect_hour_first)
 local autoreconnect_dont_reconnect_hour_second = imgui.ImInt(mainIni.autoreconnect.dont_reconnect_hour_second)
 
+local active_lavka = imgui.ImBool(mainIni.render.lavka)
 local lavki = {}
 
 -------
@@ -412,7 +412,7 @@ function main()
                 update_status = true
             elseif tonumber(updateIni.update.vers) == script_vers then
                 sampAddChatMessage(tag .. textcolor .. "Скрипт успешно загружен, обновлений не обнаружено!", tagcolor)
-                sampAddChatMessage(tag .. textcolor .. "Автор скрипта: " .. warncolor .. "Zenitrise" .. textcolor .. ".", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "Автор скрипта: " .. warncolor .. "Azenizzka" .. textcolor .. ".", tagcolor)
                 sampAddChatMessage(tag .. textcolor .. "Активация скрипта: " .. warncolor .. "/nhelp " .. textcolor .. "или " .. warncolor .. table.concat(rkeys.getKeysName(main_window.v), " + ") , tagcolor)
             end
             os.remove(update_path)
@@ -443,7 +443,8 @@ function main()
     theme()
     while true do 
         wait(0)
---------- Поиск лавок
+        -- Denis Function
+
         if active_lavka.v then
             local input = sampGetInputInfoPtr()
             local input = getStructElement(input, 0x8, 4)
@@ -454,21 +455,26 @@ function main()
             for v = 1, #lavki do
                 
                 if doesObjectExist(lavki[v]) then
-                    local result, posX, posY, posZ = getObjectCoordinates(lavki[v])
+                    local result, obX, obY, obZ = getObjectCoordinates(lavki[v])
                     local x, y, z = getCharCoordinates(PLAYER_PED)
                     
                     if result then
-                        local pX, pY = convert3DCoordsToScreen(getCharCoordinates(PLAYER_PED))
-                        local lX, lY = convert3DCoordsToScreen(posX, posY, posZ)
-                        renderFontDrawText(font, 'Свободна', lX - 30, lY - 20, 0xFF16C910, 0x90000000)
-                        renderDrawLine(pX, pY, lX, lY, 1, 0xFF52FF4D)
-                        renderDrawPolygon(pX, pY, 10, 10, 10, 0, 0xFFFFFFFF)
-                        renderDrawPolygon(lX, lY, 10, 10, 10, 0, 0xFFFFFFFF)
+                        local ObjX, ObjY = convert3DCoordsToScreen(obX, obY, obZ)
+                        local myX, myY = convert3DCoordsToScreen(x, y, z)
+
+                        if isObjectOnScreen(lavki[v]) then
+                            renderDrawLine(ObjX, ObjY, myX, myY, 1, 0xFF52FF4D)
+                            renderDrawPolygon(myX, myY, 10, 10, 10, 0, 0xFFFFFFFF)
+                            renderDrawPolygon(ObjX, ObjY, 10, 10, 10, 0, 0xFFFFFFFF)
+                            renderFontDrawText(font, 'Свободна', ObjX - 30, ObjY - 20, 0xFF16C910, 0x90000000)
                         end
                     end
                 end
             end
         end
+
+
+
         --- сундуки
         if box_toggle.v and not work then
             work = true
@@ -952,6 +958,10 @@ function imgui.OnDrawFrame()
         imgui.SameLine()
         imgui.Text(u8'Скутер новичка')
 
+        imadd.ToggleButton('##7326', active_lavka)
+        imgui.SameLine()
+        imgui.Text(u8'Функция Данияра')
+
         imgui.EndChild()
         imgui.End()
 
@@ -1100,7 +1110,7 @@ function imgui.OnDrawFrame()
 
         imgui.SetCursorPos(imgui.ImVec2(10, 195))
         imgui.Separator()
-        imgui.Text(u8"Автор: Zenitrise")
+        imgui.Text(u8"Автор: Azenizzka")
         imgui.Text(u8"Версия: " .. script_vers_text)
 
         imgui.SetCursorPos(imgui.ImVec2(75, 215))
@@ -1187,10 +1197,6 @@ function imgui.OnDrawFrame()
             if imgui.Button(fa.ICON_FA_COGS .. "##2281733") then
                 rlavka_settings_window_state.v = not rlavka_settings_window_state.v 
             end
-
-            imadd.ToggleButton('##7326', active_lavka)
-            imgui.SameLine()
-            imgui.Text(u8'Поиск лавок')
 
             imadd.ToggleButton("##22312", anti_stock)
             imgui.SameLine()
@@ -1398,7 +1404,7 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
         end
     end
 
-    if id == 25530 then
+    if id == 25526 then
         if addspawn_toggle.v then
             if addspawn_waittoggle.v then
                 lua_thread.create(function()
@@ -1406,11 +1412,11 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
                     time = addspawn_wait.v * 1000
                     wait(time)
                     sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
-                    sampSendDialogResponse(25530, 1, a, _)
+                    sampSendDialogResponse(25526, 1, a, _)
                 end)
             elseif not addspawn_waittoggle.v then 
                 local a = addspawn_id.v-1
-                sampSendDialogResponse(25530, 1, a, _)
+                sampSendDialogResponse(25526, 1, a, _)
                 sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
             end
         end
@@ -1553,9 +1559,11 @@ function savecfg()
     mainIni.bank.toggle = bank_toggle.v
 
     mainIni.stock.toggle = anti_stock.v
-    mainIni.lavk.toggle = active_lavka.v
+
     mainIni.rlavka.toggle = rlavka_toggle.v
     mainIni.rlavka.radius = rlavka_radius.v
+
+    mainIni.render.lavka = active_lavka.v
 
     inicfg.save(mainIni, directIni)
 
