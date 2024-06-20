@@ -10,8 +10,8 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 30
-local script_vers_text = "3.91"
+local script_vers = 31
+local script_vers_text = "3.95"
 local dlstatus = require("moonloader").download_status
 local update_status = false
 local download_lib = false
@@ -215,13 +215,6 @@ local mainIni = inicfg.load({
     stock = {
         toggle = false,
     },
-    con = {
-        server = 1,
-        own = false,
-        ownip = "185.169.134.3",
-        ownport = "7777",
-        nick = "Sam_Mason"
-    }
 }, "NHelper")
 
 if not doesFileExist("NHelper.ini") then
@@ -259,62 +252,6 @@ local tgpd = {"========== Pay Day ==========", " "}
 
 local rlavka_toggle = imgui.ImBool(mainIni.rlavka.toggle)
 local rlavka_radius = imgui.ImInt(mainIni.rlavka.radius)
-
-local con_server = imgui.ImInt(mainIni.con.server)
-local con_nick = imgui.ImBuffer(mainIni.con.nick, 256)
-local con_own = imgui.ImBool(mainIni.con.own)
-local con_own_ip = imgui.ImBuffer(mainIni.con.ownip, 256)
-local con_own_port = imgui.ImInt(mainIni.con.ownport)
-local con_serverip = { -- 23
-    [1] = "185.169.134.3",
-    [2] = "185.169.134.4",
-    [3] = "185.169.134.43",
-    [4] = "185.169.134.44",
-    [5] = "185.169.134.45",
-    [6] = "185.169.134.5",
-    [7] = "185.169.134.59",
-    [8] = "185.169.134.61",
-    [9] = "185.169.134.107",
-    [10] = "185.169.134.109",
-    [11] = "185.169.134.166",
-    [12] = "185.169.134.171",
-    [13] = "185.169.134.172",
-    [14] = "185.169.134.173",
-    [15] = "185.169.134.174",
-    [16] = "80.66.82.191",
-    [17] = "80.66.82.190",
-    [18] = "80.66.82.188",
-    [19] = "80.66.82.168",
-    [20] = "80.66.82.159",
-    [21] = "80.66.82.200",
-    [22] = "80.66.82.144",
-    [23] = "80.66.82.132"
-}
-local con_serverlist = { -- 23
-    [1] = "Phoenix",
-    [2] = "Tucson",
-    [3] = "Scottdale",
-    [4] = "Chandler",
-    [5] = "Brainburg",
-    [6] = "Saint Rose",
-    [7] = "Mesa",
-    [8] = "RedRock",
-    [9] = "Yuma",
-    [10] = "Surprise",
-    [11] = "Prescott",
-    [12] = "Glendale",
-    [13] = "Kingman",
-    [14] = "Winslow",
-    [15] = "Payson",
-    [16] = "Gilbert",
-    [17] = "Show Low",
-    [18] = "Casa Grande",
-    [19] = "Page",
-    [20] = "SunCity",
-    [21] = "Queen Creek",
-    [22] = "Sedona",
-    [23] = "Holiday"
-}
 
 local box_roulette_tid
 local box_platina_tid
@@ -396,10 +333,6 @@ local stata = false
 local stats = {
 }
 local really = 0
-local nalog = false
-local nalogd = {
-}
-
 
 function main()
     if not isSampfuncsLoaded() or not isSampLoaded() then return end
@@ -431,9 +364,6 @@ function main()
     lua_thread.create(get_telegram_updates)
 
     sampRegisterChatCommand("nhelp", nhelp_cmd)
-    sampRegisterChatCommand("rec", rec_cmd)
-    sampRegisterChatCommand("check", check_cmd)
-    sampRegisterChatCommand("con", con_cmd)
 
     sampRegisterChatCommand("open", box_open_now)
 
@@ -593,45 +523,6 @@ function main()
     end
 end
 
-
-function con()
-    savecfg()
-    renderDrawBox(0, 0, rx, ry, 0x50030303)
-    imgui.SetNextWindowSize(imgui.ImVec2(285, 160), imgui.Cond.FirstUseEver)
-    imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
-
-    imgui.Begin(u8"Выбор сервера", con_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-    imgui.BeginChild('##50', imgui.ImVec2(270, 125), false)
-
-    imgui.PushItemWidth(120)
-
-    imgui.InputText("##51", con_nick)
-    imgui.SameLine()
-    imgui.Text(u8"Ник")
-    imgui.Combo("##52", con_server, con_serverlist, 5)
-    imgui.SameLine()
-    imgui.Text(u8"Сервер")
-
-    imgui.Separator()
-
-    imadd.ToggleButton("##53", con_own)
-    imgui.SameLine()
-    imgui.Text(u8"Свой IP")
-    imgui.InputText("##54", con_own_ip)
-    imgui.SameLine()
-    imgui.Text(":")
-    imgui.SameLine()
-    imgui.InputInt("##55", con_own_port)
-
-    imgui.Separator()
-    if imgui.Button(u8"Подключитьcя##54") then
-        connect()
-    end
-
-    imgui.EndChild()
-    imgui.End()
-end
-
 function tg_settings()
     savecfg()
     imgui.SetNextWindowSize(imgui.ImVec2(450, 240), imgui.Cond.FirstUseEver)
@@ -668,12 +559,9 @@ function tg_settings()
     imadd.ToggleButton("##64", tg_disconnect)
     imgui.SameLine()
     imgui.Text(u8"Отключение от сервера")
-
     imadd.ToggleButton("##65", tg_payday)
     imgui.SameLine()
     imgui.Text(u8"Pay Day")
-
-
 
 
     imgui.EndChild()
@@ -1124,6 +1012,7 @@ function imgui.OnDrawFrame()
         imgui.EndChild()
 
         imgui.SameLine()
+
         ---------- Модификации ----------
         if selected_window == 1 then
             imgui.BeginChild('##2', imgui.ImVec2(255, 240), false) --------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1242,10 +1131,6 @@ function imgui.OnDrawFrame()
             imgui.SameLine()
             imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Подключение к выбранному серверу")
 
-            imgui.Text("/rec")
-            imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Переподключение к серверу. Можно указать\nпараметр")
-    
             imgui.EndChild()
         end
 
@@ -1280,49 +1165,6 @@ function nhelp_cmd()
     main_window_state.v = not main_window_state.v
     imgui.Process = main_window_state.v
     alpha()
-end
-
-
-function connect()
-    if con_own.v then
-       local ip = con_own_ip.v
-       local port = con_own_port.v
-       sampAddChatMessage(tag .. textcolor .. "Подключение к IP: " .. warncolor .. ip .. ":" .. port, tagcolor)
-       sampSetLocalPlayerName(con_nick.v)
-       sampSetGamestate(5)
-       sampConnectToServer(ip, port)
-
-    else
-        local ip = con_serverip[con_server.v + 1]
-        local port = "7777"
-        sampAddChatMessage(tag .. textcolor .. "Подключение к серверу " .. warncolor .. con_serverlist[con_server.v + 1], tagcolor)
-        sampSetLocalPlayerName(con_nick.v)
-        sampSetGamestate(5)
-        sampConnectToServer(ip, port)
-
-    end
-end
-
--- Коннект
-function con_cmd()
-    con_window_state.v = not con_window_state.v
-    imgui.Process = con_window_state.v
-    alpha()
-end
--- Реконнект на команду
-function rec_cmd(arg)
-    local delay = arg
-    if #arg == 0 then
-        delay = 0
-    end
-    lua_thread.create(function()
-        sampSetGamestate(5)
-        local ip, port = sampGetCurrentServerAddress()
-        sampAddChatMessage(tag .. textcolor .. 'Задержка: '.. warncolor .. delay .. textcolor ..' сек.', tagcolor)
-        wait(delay * 1000)
-        sampConnectToServer(ip, port)
-    end)
-
 end
 
 function sampev.onServerMessage(color, text)
@@ -1366,15 +1208,7 @@ function sampev.onServerMessage(color, text)
 
         end
     end
-
-    if text:find("Вы оплатили все налоги на сумму:") then
-        if nalog then
-            nalog = false
-            sendTelegramNotification(text)
-        end
-    end
 end
-
 ----- Авто лавка и автоспавн
 function sampev.onShowDialog(id, style, title, b1, b2, text)
     if lavka_toggle.v then
@@ -1433,52 +1267,7 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
             end
         end
     end 
-
-    lua_thread.create(function()
-        if id == 235 then
-            if stata then
-                stats = {
-                    "/stats",
-                    "",
-                    "=========================================",
-                    ""
-                }
-                stata = false
-                for line in text:gmatch("[^\n]+") do -- разбиваем чтобы искать по строкам
-                    table.insert(stats, line)
-                end
-                wait(0)
-                sampCloseCurrentDialogWithButton(0)
-           end
-        end
-
-        if id == 6565 and nalog then
-            wait(500)
-            sampSendDialogResponse(6565, 1, 4, _)
-        end
-
-        if id == 15252 and nalog then
-            nalogd = {
-                "/nalog",
-                "",
-                "=========================================",
-                ""
-            }
-
-            for line in text:gmatch("[^\n]+") do -- разбиваем чтобы искать по строкам
-                table.insert(nalogd, line)
-            end
-
-            wait(500)
-            sampSendDialogResponse(15252, 1)
-            sampCloseCurrentDialogWithButton(1)
-            sampSendClickTextdraw(65535)
-        end
-
-    end)
-
 end
-
 
 function sampev.onSetObjectMaterialText(id, data)
     
@@ -1526,12 +1315,6 @@ function cfg_part_1()
     mainIni.tg.disconnect = tg_disconnect.v
     mainIni.tg.perevod = tg_perevod.v
     mainIni.tg.payday = tg_payday.v
-
-    mainIni.con.server = con_server.v
-    mainIni.con.nick = con_nick.v
-    mainIni.con.own = con_own.v
-    mainIni.con.ownip = con_own_ip.v
-    mainIni.con.ownport = con_own_port.v
 
     mainIni.box.toggle = box_toggle.v
     mainIni.box.roulette = box_roulette.v
@@ -1588,12 +1371,6 @@ function cfg_part_2()
     mainIni.rlavka.radius = rlavka_radius.v
 end
 
-function phone_nalog()
-    sampSendChat("/phone")
-    wait(100)
-    sampSendClickTextdraw(2128)
-end
-
 function onReceivePacket(id)
     if id == 32 and tg_disconnect.v then 
         sendTelegramNotification("Вы были отключены от сервера!")
@@ -1621,6 +1398,16 @@ function onReceivePacket(id)
                 sampAddChatMessage(tag .. textcolor .. "Нельзя в это время!", tagcolor)
             end
         end)
+    end
+end
+
+function onWindowMessage(msg, wparam, lparam)
+    if msg == 0x100 or msg == 0x101 then
+        if wparam == VK_ESCAPE and main_window_state.v and not isPauseMenuActive() then
+            consumeWindowMessage(true, false)
+            if msg == 0x101 then dialogenable = false end
+            main_window_state = imgui.ImBool(false)
+        end
     end
 end
 --------------------------- T E L E G R A M ----------------------
@@ -1712,8 +1499,6 @@ function processing_telegram_messages(result) -- функция проверОчки того что отп
                                     "",
                                     "/off  -->  Выключить компьютер",
                                     "",
-                                    "/nalog  -->  Оплата налогов через телефон (Работает только со старым телефоном)",
-                                    "",
                                     "/stats  -->  Статистика со /stats",
                                     "",
                                     "/reload  -->  Перезагрузить скрипт",
@@ -1751,15 +1536,6 @@ function processing_telegram_messages(result) -- функция проверОчки того что отп
                                     sendTelegramNotification(tag .. 'Неизвестная команда! Введите /help')
                                 end
 
-                            elseif text:match("^/nalog") then
-                                phone_nalog()
-                                nalog = true
-                                wait(1200)
-                                table.insert(nalogd, "")
-                                wait(100)
-                                table.insert(nalogd, "=========================================")
-                                wait(100)
-                                sendTelegramNotification(table.concat(nalogd, "\n"))
                             elseif text:match("^/unload") then
                                 sendTelegramNotification(tag .. "Скрипт был успешно выгружен!")
                                 thisScript():unload()
