@@ -10,7 +10,7 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 31
+local script_vers = 32
 local script_vers_text = "3.95"
 local dlstatus = require("moonloader").download_status
 local update_status = false
@@ -998,6 +998,11 @@ function imgui.OnDrawFrame()
             selected_window = 3
         end
 
+        imgui.SetCursorPos(imgui.ImVec2(5, 130))
+        if imgui.Button(fa.ICON_FA_ALIGN_JUSTIFY .. u8' AFK##73', imgui.ImVec2(90, 20)) then
+            selected_window = 4
+        end
+
         imgui.SetCursorPos(imgui.ImVec2(10, 195))
         imgui.Separator()
         imgui.Text(u8"Автор: Zenitrise")
@@ -1044,7 +1049,7 @@ function imgui.OnDrawFrame()
             if imgui.Button(fa.ICON_FA_COGS .. "##15") then
                 timechange_settings_window_state.v = not timechange_settings_window_state.v
             end
-
+            
             imadd.ToggleButton("##16", addspawn_toggle)
             imgui.SameLine()
             imgui.Text(u8"Авто выбор спавна")
@@ -1071,14 +1076,6 @@ function imgui.OnDrawFrame()
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##40") then
                 box_settings_window_state.v = not box_settings_window_state.v
-            end
-
-            imadd.ToggleButton("##59", tg_toggle)
-            imgui.SameLine()
-            imgui.Text(u8"Уведомления в Telegram")
-            imgui.SameLine()
-            if imgui.Button(fa.ICON_FA_COGS .. "##60") then
-                tg_settings_window_state.v = not tg_settings_window_state.v
             end
 
             imadd.ToggleButton("##2281337", rlavka_toggle)
@@ -1132,14 +1129,22 @@ function imgui.OnDrawFrame()
             imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Подключение к выбранному серверу")
 
             imgui.EndChild()
+        elseif selected_window == 4 then
+            imgui.BeginChild('##74', imgui.ImVec2(255, 240), false)
+
+            imadd.ToggleButton("##59", tg_toggle)
+            imgui.SameLine()
+            imgui.Text(u8"Уведомления в Telegram")
+            imgui.SameLine()
+            if imgui.Button(fa.ICON_FA_COGS .. "##60") then
+                tg_settings_window_state.v = not tg_settings_window_state.v
+            end
+            imgui.EndChild()
         end
 
         imgui.End()
-
     end
-
 end
-
 -- Для бинда
 function main_window_activate()
     if hotkey_toggle.v then
@@ -1267,6 +1272,31 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
             end
         end
     end 
+
+    lua_thread.create(function()
+        if id == 235 then
+            if stata then
+                stats = {
+                    "/stats",
+                    "",
+                    "=========================================",
+                    ""
+                }
+                stata = false
+                for line in text:gmatch("[^\n]+") do -- разбиваем чтобы искать по строкам
+                    table.insert(stats, line)
+                end
+                wait(0)
+                sampCloseCurrentDialogWithButton(0)
+           end
+        end
+
+        if id == 6565 then
+            wait(500)
+            sampSendDialogResponse(6565, 1, 4, _)
+        end
+
+    end)
 end
 
 function sampev.onSetObjectMaterialText(id, data)
