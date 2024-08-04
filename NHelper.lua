@@ -10,7 +10,7 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 33
+local script_vers = 34
 local script_vers_text = "3.95"
 local dlstatus = require("moonloader").download_status
 local update_status = false
