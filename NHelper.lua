@@ -10,7 +10,7 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 32
+local script_vers = 33
 local script_vers_text = "3.95"
 local dlstatus = require("moonloader").download_status
 local update_status = false
@@ -1022,16 +1022,6 @@ function imgui.OnDrawFrame()
         if selected_window == 1 then
             imgui.BeginChild('##2', imgui.ImVec2(255, 240), false) --------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-            imadd.ToggleButton("##3", autoreconnect_toggle)
-            imgui.SameLine()
-            imgui.Text(u8"Авто-Реконнект")
-            imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматически переподключает вас к серверу, если\nвы были от него отключены. Можно выбрать рандомную задержку.")
-            imgui.SameLine()
-            if imgui.Button(fa.ICON_FA_COGS .. "##9 Настройки") then 
-                autoreconnect_settings_window_state.v = not autoreconnect_settings_window_state.v
-            end 
-
             imadd.ToggleButton("##8", lavka_toggle)
             imgui.SameLine()
             imgui.Text(u8"Авто-Лавка")
@@ -1049,16 +1039,6 @@ function imgui.OnDrawFrame()
             if imgui.Button(fa.ICON_FA_COGS .. "##15") then
                 timechange_settings_window_state.v = not timechange_settings_window_state.v
             end
-            
-            imadd.ToggleButton("##16", addspawn_toggle)
-            imgui.SameLine()
-            imgui.Text(u8"Авто выбор спавна")
-            imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматический выбор спавна, если вы\nиграете с ADD-VIP")
-            imgui.SameLine()
-            if imgui.Button(fa.ICON_FA_COGS .. "##17") then
-                addspawn_settings_window_state.v = not addspawn_settings_window_state.v
-            end
 
             imadd.ToggleButton("##25", render_toggle)
             imgui.SameLine()
@@ -1068,14 +1048,6 @@ function imgui.OnDrawFrame()
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##26") then
                 render_settings_window_state.v = not render_settings_window_state.v
-            end
-
-            imadd.ToggleButton("##39", box_toggle)
-            imgui.SameLine()
-            imgui.Text(u8"Авто-Открытие сундуков")
-            imgui.SameLine()
-            if imgui.Button(fa.ICON_FA_COGS .. "##40") then
-                box_settings_window_state.v = not box_settings_window_state.v
             end
 
             imadd.ToggleButton("##2281337", rlavka_toggle)
@@ -1089,10 +1061,6 @@ function imgui.OnDrawFrame()
             imadd.ToggleButton('##7326', active_lavka)
             imgui.SameLine()
             imgui.Text(u8'Поиск лавок')
-
-            imadd.ToggleButton("##22312", anti_stock)
-            imgui.SameLine()
-            imgui.Text(u8"Анти-Диалог с акциями")
 
             imadd.ToggleButton("##25412", bank_toggle)
             imgui.SameLine()
@@ -1132,6 +1100,38 @@ function imgui.OnDrawFrame()
         elseif selected_window == 4 then
             imgui.BeginChild('##74', imgui.ImVec2(255, 240), false)
 
+            imadd.ToggleButton("##3", autoreconnect_toggle)
+            imgui.SameLine()
+            imgui.Text(u8"Авто-Реконнект")
+            imgui.SameLine()
+            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматически переподключает вас к серверу, если\nвы были от него отключены. Можно выбрать рандомную задержку.")
+            imgui.SameLine()
+            if imgui.Button(fa.ICON_FA_COGS .. "##9 Настройки") then 
+                autoreconnect_settings_window_state.v = not autoreconnect_settings_window_state.v
+            end 
+
+            imadd.ToggleButton("##22312", anti_stock)
+            imgui.SameLine()
+            imgui.Text(u8"Анти-Диалог с акциями")
+            
+            imadd.ToggleButton("##39", box_toggle)
+            imgui.SameLine()
+            imgui.Text(u8"Авто-Открытие сундуков")
+            imgui.SameLine()
+            if imgui.Button(fa.ICON_FA_COGS .. "##40") then
+                box_settings_window_state.v = not box_settings_window_state.v
+            end
+
+            imadd.ToggleButton("##16", addspawn_toggle)
+            imgui.SameLine()
+            imgui.Text(u8"Авто выбор спавна")
+            imgui.SameLine()
+            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматический выбор спавна, если вы\nиграете с ADD-VIP")
+            imgui.SameLine()
+            if imgui.Button(fa.ICON_FA_COGS .. "##17") then
+                addspawn_settings_window_state.v = not addspawn_settings_window_state.v
+            end
+            
             imadd.ToggleButton("##59", tg_toggle)
             imgui.SameLine()
             imgui.Text(u8"Уведомления в Telegram")
@@ -1203,6 +1203,10 @@ function sampev.onServerMessage(color, text)
         elseif text:find("Текущая сумма в банке:") then
             table.insert(tgpd, text)
         elseif text:find("Текущая сумма на депозите:") then
+            table.insert(tgpd, text)
+        elseif text:find("Общяя заработная плата:") then
+            table.insert(tgpd, text)
+        elseif text:find("text") then
             table.insert(tgpd, text)
         elseif text:find("В данный момент у вас") then
             table.insert(tgpd, text)
