@@ -10,8 +10,8 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 36
-local script_vers_text = "3.97"
+local script_vers = 37
+local script_vers_text = "3.98"
 local dlstatus = require("moonloader").download_status
 local update_status = false
 local download_lib = false
@@ -364,7 +364,6 @@ function main()
     lua_thread.create(get_telegram_updates)
 
     sampRegisterChatCommand("nhelp", nhelp_cmd)
-    sampRegisterChatCommand("rec", rec_cmd)
     sampRegisterChatCommand("open", box_open_now)
     sampRegisterChatCommand("kickme",function()
             
@@ -1151,21 +1150,6 @@ function main_window_activate()
         imgui.Process = main_window_state.v
         alpha()
     end
-end
--- Реконект
-function rec_cmd(arg)
-    local delay = arg
-    if #arg == 0 then
-        delay = 0
-    end
-    lua_thread.create(function()
-        sampSetGamestate(5)
-        local ip, port = sampGetCurrentServerAddress()
-        sampAddChatMessage(tag .. textcolor .. 'Задержка: '.. warncolor .. delay .. textcolor ..' сек.', tagcolor)
-        wait(delay * 1000)
-        sampConnectToServer(ip, port)
-    end)
-
 end
 -- Изменение времени
 function setTime()
