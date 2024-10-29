@@ -10,8 +10,8 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 37
-local script_vers_text = "3.98"
+local script_vers = 38
+local script_vers_text = "3.99"
 local dlstatus = require("moonloader").download_status
 local update_status = false
 local download_lib = false
@@ -160,18 +160,6 @@ local mainIni = inicfg.load({
         open_delay_max = 75,
         do_delay = 1
     },
-    render = {
-        toggle = false,
-        custom = false,
-        customid = 1337,
-        customname = "Own ID",
-        line = true,
-        text = true,
-        width_line = 2,
-        width_text = 10,
-        olen = false,
-        skuter = false
-    },
     hotkey = {
         main_window = "[18,82]",
         toggle = true
@@ -271,19 +259,6 @@ local box_open_delay_max = imgui.ImInt(mainIni.box.open_delay_max)
 local box_do_delay = imgui.ImInt(mainIni.box.do_delay)
 local work = false
 
-local render_custom = imgui.ImBool(mainIni.render.custom)
-local render_custom_id = imgui.ImInt(mainIni.render.customid)
-local render_custom_name = imgui.ImBuffer(mainIni.render.customname, 256)
-local render_toggle = imgui.ImBool(mainIni.render.toggle)
-local render_line = imgui.ImBool(mainIni.render.line)
-local render_text = imgui.ImBool(mainIni.render.text)
-local render_width_line = imgui.ImFloat(mainIni.render.width_line)
-local render_width_text = imgui.ImFloat(mainIni.render.width_text)
-local render_olen = imgui.ImBool(mainIni.render.olen)
-local render_color_line = 0xFF919191
-local render_color_text = 0xFF36d6b1
-local render_skuter = imgui.ImBool(mainIni.render.skuter)
-
 local hotkey_toggle = imgui.ImBool(mainIni.hotkey.toggle)
 
 local main_window_state = imgui.ImBool(false)
@@ -291,8 +266,6 @@ local autoreconnect_settings_window_state = imgui.ImBool(false)
 local lavka_settings_window_state = imgui.ImBool(false)
 local timechange_settings_window_state = imgui.ImBool(false)
 local addspawn_settings_window_state = imgui.ImBool(false)
-local render_settings_window_state = imgui.ImBool(false)
-local render_custom_settings_window_state = imgui.ImBool(false)
 local box_settings_window_state = imgui.ImBool(false)
 local con_window_state = imgui.ImBool(false)
 local tg_settings_window_state = imgui.ImBool(false)
@@ -469,54 +442,6 @@ function main()
                 end
             end)
             break
-        end
-
-        ---------------- Рендер
-        if render_toggle.v then 
-            for k, v in pairs(getAllObjects()) do
-                local id = getObjectModel(v)
-                    if isObjectOnScreen(v) and render_olen.v and id == 19315 then
-                        local name = "Олень"
-                        local _, OX, OY, OZ = getObjectCoordinates(v)
-                        local PX, PY, PZ = getCharCoordinates(PLAYER_PED)
-                        local OXS, OYS = convert3DCoordsToScreen(OX, OY, OZ)
-                        local PXS, PYS = convert3DCoordsToScreen(PX, PY, PZ)
-                        if render_line.v then
-                            renderDrawLine(PXS, PYS, OXS, OYS, render_width_line.v, render_color_line)
-                        end
-                        if render_text.v then
-                            renderFontDrawText(font, name, OXS ,OYS, render_color_text)
-                        end
-                    end
-
-                    if isObjectOnScreen(v) and render_skuter.v and id == 11740 then
-                        local name = "Скутер Новичков"
-                        local _, OX, OY, OZ = getObjectCoordinates(v)
-                        local PX, PY, PZ = getCharCoordinates(PLAYER_PED)
-                        local OXS, OYS = convert3DCoordsToScreen(OX, OY, OZ)
-                        local PXS, PYS = convert3DCoordsToScreen(PX, PY, PZ)
-                        if render_line.v then
-                            renderDrawLine(PXS, PYS, OXS, OYS, render_width_line.v, render_color_line)
-                        end
-                        if render_text.v then
-                            renderFontDrawText(font, name, OXS ,OYS, render_color_text)
-                        end
-                    end
-    
-                    if isObjectOnScreen(v) and render_custom.v and id == render_custom_id.v then
-                        local name = render_custom_name.v
-                        local _, OX, OY, OZ = getObjectCoordinates(v)
-                        local PX, PY, PZ = getCharCoordinates(PLAYER_PED)
-                        local OXS, OYS = convert3DCoordsToScreen(OX, OY, OZ)
-                        local PXS, PYS = convert3DCoordsToScreen(PX, PY, PZ)
-                        if render_line.v then
-                            renderDrawLine(PXS, PYS, OXS, OYS, render_width_line.v, render_color_line)
-                        end
-                        if render_text.v then
-                            renderFontDrawText(font, name, OXS ,OYS, render_color_text)
-                        end
-                    end
-            end
         end
     end
 end
@@ -740,7 +665,7 @@ end
 
 function imgui.OnDrawFrame()
 
-    if not main_window_state.v and not con_window_state.v and not bank_settings_window_state.v and not box_settings_window_state.v and not rlavka_settings_window_state.v and not lavka_settings_window_state.v and not render_settings_window_state.v and not addspawn_settings_window_state.v and not timechange_settings_window_state.v and not autoreconnect_settings_window_state.v and not render_custom_settings_window_state.v then
+    if not main_window_state.v and not con_window_state.v and not bank_settings_window_state.v and not box_settings_window_state.v and not rlavka_settings_window_state.v and not lavka_settings_window_state.v and not addspawn_settings_window_state.v and not timechange_settings_window_state.v and not autoreconnect_settings_window_state.v then
         imgui.Process = false
     end
 
@@ -770,93 +695,12 @@ function imgui.OnDrawFrame()
         tg_settings_window_state.v = false
         box_settings_window_state.v = false
         lavka_settings_window_state.v = false
-        render_settings_window_state.v = false
         rlavka_settings_window_state.v = false
         addspawn_settings_window_state.v = false
         timechange_settings_window_state.v = false
         autoreconnect_settings_window_state.v = false
-        render_custom_settings_window_state.v = false
         bank_settings_window_state.v = false
     end
-
-
------ Настройки своего обьектиа
-    if render_custom_settings_window_state.v then
-        imgui.SetNextWindowSize(imgui.ImVec2(230, 85), imgui.Cond.FirstUseEver)
-        imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
-
-        imgui.Begin(u8"Настройки своего обьекта", render_custom_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-        imgui.BeginChild('##37', imgui.ImVec2(215, 50), false)
-
-        imgui.PushItemWidth(100)
-        imgui.InputText(u8"Название обьекта##35", render_custom_name)
-
-        imgui.PushItemWidth(100)
-        imgui.InputInt(u8'ID обьекта##34', render_custom_id, 0, 0)
-        imgui.SameLine()
-        if imgui.Button(fa.ICON_FA_QUESTION_CIRCLE .. '##38') then
-            os.execute('explorer https://dev.prineside.com/ru/gtasa_samp_model_id/')
-        end
-
-        imgui.EndChild()
-        imgui.End()
-    end
-
-
---------- Настройки рендера 
-    if render_settings_window_state.v then
-
-        imgui.SetNextWindowSize(imgui.ImVec2(220, 150), imgui.Cond.FirstUseEver)
-        imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
-
-        imgui.Begin(u8"Настройки рендера", render_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-        imgui.BeginChild('##27', imgui.ImVec2(205, 120), false)
-
-        imadd.ToggleButton("##28", render_line)
-        imgui.SameLine()
-        imgui.Text(u8"Линии")
-        imgui.SameLine()
-        imgui.PushItemWidth(100)
-        imgui.SliderFloat("##32", render_width_line, 1, 10)
-        imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Отвечает за отображение линий до обьекта")
-
-        imadd.ToggleButton("##29", render_text)
-        imgui.SameLine()
-        imgui.Text(u8"Текст")
-        imgui.SameLine()
-
-        imgui.PushItemWidth(100)
-        imgui.SliderFloat('##31', render_width_text, 5, 25)
-        font = renderCreateFont("Arial", render_width_text.v, 5)
-        imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Отвечает за отображение названия обьекта")
-        imadd.ToggleButton("##33", render_custom)
-        imgui.SameLine()
-        imgui.Text(u8'Собственный обьект')
-        imgui.SameLine()
-        if imgui.Button(fa.ICON_FA_COGS .. "##36") then
-            render_custom_settings_window_state.v = not render_custom_settings_window_state.v
-        end
-    
-        imgui.Separator()
-
-
-        imadd.ToggleButton('##30', render_olen)
-        imgui.SameLine()
-        imgui.Text(u8'Олени')
-
-        imadd.ToggleButton('##58', render_skuter)
-        imgui.SameLine()
-        imgui.Text(u8'Скутер новичка')
-
-        imgui.EndChild()
-        imgui.End()
-
-    end
-
-
-
 
 ------------- Автовыбор спавна -----------
     if addspawn_settings_window_state.v then
@@ -1036,16 +880,6 @@ function imgui.OnDrawFrame()
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##15") then
                 timechange_settings_window_state.v = not timechange_settings_window_state.v
-            end
-
-            imadd.ToggleButton("##25", render_toggle)
-            imgui.SameLine()
-            imgui.Text(u8'Рендер обьектов')
-            imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Валл Хак на обьекты")
-            imgui.SameLine()
-            if imgui.Button(fa.ICON_FA_COGS .. "##26") then
-                render_settings_window_state.v = not render_settings_window_state.v
             end
 
             imadd.ToggleButton("##2281337", rlavka_toggle)
@@ -1355,17 +1189,6 @@ function cfg_part_1()
 end
 
 function cfg_part_2()
-    mainIni.render.toggle = render_toggle.v
-    mainIni.render.line = render_line.v
-    mainIni.render.text = render_text.v
-    mainIni.render.width_line = render_width_line.v
-    mainIni.render.width_text = render_width_text.v
-    mainIni.render.olen = render_olen.v
-    mainIni.render.custom = render_custom.v
-    mainIni.render.customid = render_custom_id.v
-    mainIni.render.customname = render_custom_name.v
-    mainIni.render.skuter = render_skuter.v
-
     mainIni.addspawn.toggle = addspawn_toggle.v
     mainIni.addspawn.waittoggle = addspawn_waittoggle.v
     mainIni.addspawn.id = addspawn_id.v
