@@ -1027,8 +1027,6 @@ function sampev.onServerMessage(color, text)
     if tg_toggle.v and tg_payday.v then
         if text:find("Организационная зарплата:") then
             table.insert(tgpd, text)
-        elseif text:find("Сумма к выплате:") then
-            table.insert(tgpd, text)
         elseif text:find("Текущая сумма в банке:") then
             table.insert(tgpd, text)
         elseif text:find("Текущая сумма на депозите:") then
@@ -1097,6 +1095,7 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
                     wait(time)
                     sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
                     sampSendDialogResponse(25526, 1, a, _)
+                    sampCloseCurrentDialogWithButton(0)
                 end)
             elseif not addspawn_waittoggle.v then 
                 local a = addspawn_id.v-1
