@@ -10,7 +10,7 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 38
+local script_vers = 39
 local script_vers_text = "3.99"
 local dlstatus = require("moonloader").download_status
 local update_status = false
@@ -1027,17 +1027,15 @@ function sampev.onServerMessage(color, text)
     if tg_toggle.v and tg_payday.v then
         if text:find("Организационная зарплата:") then
             table.insert(tgpd, text)
-        elseif text:find("Депозит в банке:") then
-            table.insert(tgpd, text)
         elseif text:find("Сумма к выплате:") then
             table.insert(tgpd, text)
         elseif text:find("Текущая сумма в банке:") then
             table.insert(tgpd, text)
         elseif text:find("Текущая сумма на депозите:") then
             table.insert(tgpd, text)
-        elseif text:find("Общяя заработная плата:") then
+        elseif text:find("Общая заработная плата:") then
             table.insert(tgpd, text)
-        elseif text:find("text") then
+        elseif text:find("Баланс на донат-счет:") then
             table.insert(tgpd, text)
         elseif text:find("В данный момент у вас") then
             table.insert(tgpd, text)
