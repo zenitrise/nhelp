@@ -10,7 +10,7 @@ local warncolor = "{9c9c9c}"
 
 ---------- Авто-Обновление ----------
 
-local script_vers = 39
+local script_vers = 41
 local script_vers_text = "3.99"
 local dlstatus = require("moonloader").download_status
 local update_status = false
@@ -193,10 +193,6 @@ local mainIni = inicfg.load({
         toggle = false,
         radius = 10
     },
-    bank = {
-        toggle = false,
-        pin = 123456
-    },
     lavk = {
         toggle = false,
     },
@@ -270,7 +266,6 @@ local box_settings_window_state = imgui.ImBool(false)
 local con_window_state = imgui.ImBool(false)
 local tg_settings_window_state = imgui.ImBool(false)
 local rlavka_settings_window_state = imgui.ImBool(false)
-local bank_settings_window_state = imgui.ImBool(false)
 
 local addspawn_toggle = imgui.ImBool(mainIni.addspawn.toggle)
 local addspawn_id = imgui.ImInt(mainIni.addspawn.id)
@@ -286,8 +281,6 @@ local lavka_color = imgui.ImInt(mainIni.lavka.color)
 local lavka_name = imgui.ImBuffer(mainIni.lavka.name, 256)
 local lavka_toggle = imgui.ImBool(mainIni.lavka.toggle)
 
-local bank_toggle = imgui.ImBool(mainIni.bank.toggle)
-local bank_pin = imgui.ImInt(mainIni.bank.pin)
 local active_lavka = imgui.ImBool(mainIni.lavk.toggle)
 local anti_stock = imgui.ImBool(mainIni.stock.toggle)
 
@@ -447,7 +440,6 @@ function main()
 end
 
 function tg_settings()
-    savecfg()
     imgui.SetNextWindowSize(imgui.ImVec2(450, 240), imgui.Cond.FirstUseEver)
     imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
@@ -455,10 +447,14 @@ function tg_settings()
     imgui.BeginChild('##61', imgui.ImVec2(435, 230), false)
 
     imgui.PushItemWidth(340)
-    imgui.InputText("Bot Token", token)
+    if imgui.InputText("Bot Token", token) then
+        savecfg()
+    end
 
     imgui.PushItemWidth(80)
-    imgui.InputText("User ID", chat_id)
+    if imgui.InputText("User ID", chat_id) then
+        savecfg()
+    end
     if imgui.Button(u8"Проверить##66") then
         sampAddChatMessage(tag .. textcolor .. "Отправляю уведомление в " .. warncolor .. "Telegram" .. textcolor .. "..", tagcolor)
         sendTelegramNotification(tag .. "Я живой!")
@@ -467,22 +463,32 @@ function tg_settings()
     imgui.Text(u8"Уведомления:")
     imgui.Separator()
 
-    imadd.ToggleButton("##66", tg_perevod)
+    if imadd.ToggleButton("##66", tg_perevod) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Переводы")
 
-    imadd.ToggleButton("##62", tg_box)
+    if imadd.ToggleButton("##62", tg_box) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Призы из сундуков")
 
-    imadd.ToggleButton("##63", tg_cr)
+    if imadd.ToggleButton("##63", tg_cr) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Покупка/Продажа на ЦР")
 
-    imadd.ToggleButton("##64", tg_disconnect)
+    if imadd.ToggleButton("##64", tg_disconnect) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Отключение от сервера")
-    imadd.ToggleButton("##65", tg_payday)
+    if imadd.ToggleButton("##65", tg_payday) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Pay Day")
 
@@ -492,8 +498,6 @@ function tg_settings()
 end
 
 function rlavka_settings()
-    savecfg()
-
     imgui.SetNextWindowSize(imgui.ImVec2(220, 70), imgui.Cond.FirstUseEver)
     imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
@@ -501,7 +505,9 @@ function rlavka_settings()
     imgui.BeginChild('##38282', imgui.ImVec2(205, 35), false)
 
     imgui.PushItemWidth(70)
-    imgui.SliderInt(u8'Радиус отображения', rlavka_radius, 5, 50)
+    if imgui.SliderInt(u8'Радиус отображения', rlavka_radius, 5, 50) then
+        savecfg()
+    end
 
     imgui.EndChild()
     imgui.End()
@@ -514,39 +520,57 @@ function box_settings()
     imgui.Begin(u8"Настройки Авто-Открытия сундуков", box_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
     imgui.BeginChild('##41', imgui.ImVec2(305, 210), false)
 
-    imadd.ToggleButton("##42", box_roulette)
+    if imadd.ToggleButton("##42", box_roulette) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Сундук рулетки")
 
-    imadd.ToggleButton("##43", box_platina)
+    if imadd.ToggleButton("##43", box_platina) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Платиновый сундук")
 
-    imadd.ToggleButton("##44", box_donate)
+    if imadd.ToggleButton("##44", box_donate) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Донатный сундук")
 
-    imadd.ToggleButton("##45", box_elonmusk)
+    if imadd.ToggleButton("##45", box_elonmusk) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Тайник Илона Маска")
 
-    imadd.ToggleButton("##46", box_lossantos)
+    if imadd.ToggleButton("##46", box_lossantos) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Тайник Лос-Сантоса")
 
-    imadd.ToggleButton("##452123", box_vicecity)
+    if imadd.ToggleButton("##452123", box_vicecity) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.Text(u8"Тайник Vice-City")
     imgui.Separator()
 
     imgui.PushItemWidth(100)
-    imgui.InputInt(u8"Минимальная задержка##47", box_open_delay_min)
+    if imgui.InputInt(u8"Минимальная задержка##47", box_open_delay_min) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Рандомная адержка между открытием инвентаря\nв минутах") 
-    imgui.InputInt(u8"Максимальная задержка##48", box_open_delay_max)
+    if imgui.InputInt(u8"Максимальная задержка##48", box_open_delay_max) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Рандомная адержка между открытием инвентаря\nв минутах")
-    imgui.InputInt(u8"Задержка между действиями##49", box_do_delay  )
+    if imgui.InputInt(u8"Задержка между действиями##49", box_do_delay  ) then
+        savecfg()
+    end
     imgui.SameLine()
     imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Задержка между действиями (открыть сундук, нажать кнопку\nзакрыть инвентарь), в секундах")
 
@@ -562,7 +586,9 @@ function lavka_settings()
         imgui.BeginChild('##11', imgui.ImVec2(285, 365), false)
 
         imgui.PushItemWidth(150)
-        imgui.InputText(u8'Название лавки', lavka_name)
+        if imgui.InputText(u8'Название лавки', lavka_name) then
+            savecfg()
+        end
         imgui.SameLine()
         imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Название должно быть от 3 до 20 символов включительно.")
         if imgui.Button(u8'Проверить название##12') then
@@ -577,7 +603,9 @@ function lavka_settings()
         imgui.Separator()
 
         imgui.PushItemWidth(100)
-        imgui.Combo(u8'Выбор цвета##13', lavka_color, colors, #colors)
+        if imgui.Combo(u8'Выбор цвета##13', lavka_color, colors, #colors) then
+            savecfg()
+        end
         imgui.Separator()
 
         imgui.Text(u8'1 цвет:') 
@@ -649,23 +677,9 @@ function lavka_settings()
         imgui.End()
 end
 
-function bank_settings()
-        imgui.SetNextWindowSize(imgui.ImVec2(100, 60), imgui.Cond.FirstUseEver)
-        imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
-
-        imgui.Begin(u8"PIN-код", bank_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-        imgui.BeginChild('##151422', imgui.ImVec2(85, 25), false)
-
-        imgui.PushItemWidth(55)
-        imgui.InputInt(u8'PIN', bank_pin, 0, 0)
-
-        imgui.EndChild()
-        imgui.End()
-end
-
 function imgui.OnDrawFrame()
 
-    if not main_window_state.v and not con_window_state.v and not bank_settings_window_state.v and not box_settings_window_state.v and not rlavka_settings_window_state.v and not lavka_settings_window_state.v and not addspawn_settings_window_state.v and not timechange_settings_window_state.v and not autoreconnect_settings_window_state.v then
+    if not main_window_state.v and not con_window_state.v and not box_settings_window_state.v and not rlavka_settings_window_state.v and not lavka_settings_window_state.v and not addspawn_settings_window_state.v and not timechange_settings_window_state.v and not autoreconnect_settings_window_state.v then
         imgui.Process = false
     end
 
@@ -686,10 +700,6 @@ function imgui.OnDrawFrame()
         box_settings()
     end
 
-    if bank_settings_window_state.v then
-        bank_settings()
-    end
-
     if not main_window_state.v then
         --con_window_state.v = false
         tg_settings_window_state.v = false
@@ -699,7 +709,6 @@ function imgui.OnDrawFrame()
         addspawn_settings_window_state.v = false
         timechange_settings_window_state.v = false
         autoreconnect_settings_window_state.v = false
-        bank_settings_window_state.v = false
     end
 
 ------------- Автовыбор спавна -----------
@@ -711,17 +720,23 @@ function imgui.OnDrawFrame()
         imgui.BeginChild('##18', imgui.ImVec2(215, 75), false)
 
         imgui.PushItemWidth(70)
-        imgui.InputInt(u8'Номер спавна', addspawn_id)
+        if imgui.InputInt(u8'Номер спавна', addspawn_id) then
+            savecfg()
+        end
         imgui.SameLine()
         imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Номер места, где вам нужно заспавниться.\nНа пример, если нужно выбрать: [1] Вокзал\nто выбирайте цифру 1")
         imgui.Separator()
-        imadd.ToggleButton('##19', addspawn_waittoggle)
+        if imadd.ToggleButton('##19', addspawn_waittoggle) then
+            savecfg()
+        end
         imgui.SameLine()
         imgui.Text(u8"Задержка перед выбором")
         imgui.SameLine()
         imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Задержка в секундах перед тем, как\nотправить ответ на диалог")
         imgui.PushItemWidth(50)
-        imgui.InputInt('', addspawn_wait, 0, 0)
+        if imgui.InputInt('', addspawn_wait, 0, 0) then
+            savecfg()
+        end
         imgui.SameLine()
         imgui.Text(u8'секунд')
 
@@ -741,13 +756,19 @@ function imgui.OnDrawFrame()
         imgui.BeginChild('##15', imgui.ImVec2(195, 75), false)
 
         imgui.PushItemWidth(100)
-        imgui.SliderInt(u8'Часы', timechange_hours, 0, 23)
+        if imgui.SliderInt(u8'Часы', timechange_hours, 0, 23) then
+            savecfg()
+        end
         imgui.PopItemWidth()
         imgui.PushItemWidth(100)
-        imgui.SliderInt(u8'Минуты', timechange_minutes, 0, 59)
+        if imgui.SliderInt(u8'Минуты', timechange_minutes, 0, 59) then
+            savecfg()
+        end
         imgui.PopItemWidth()
         imgui.PushItemWidth(100)
-        imgui.SliderInt(u8'Погода', timechange_weather, 0, 45)
+        if imgui.SliderInt(u8'Погода', timechange_weather, 0, 45) then
+            savecfg()
+        end
         imgui.PopItemWidth()
         imgui.SameLine()
         imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"0 - 7 = несколько вариантов чистого синего неба\n08 = гроза\n09 = густой туман и пасмурно\n10 = ясное небо\n11 = дикое пекло\n12 - 15 = смуглая и неприятная погода\n16 = тусклая и дождливая\n17 - 18 = жара\n19 = песчаная буря\n20 = туманная погода\n21 = ночь с пурпурным небом\n22 = ночь с зеленоватым небом\n23 в 26 = изменения бледного апельсина\n27 в 29 = изменения свежий синие\n30 в 32 = изменения темного, неясного, чирка\n33 = вечер в коричневатых оттенках\n34 = погода с синими/пурпурными оттенками\n35 = тусклая и унылая погода в коричневых тонах\n36 в 38 = яркая и туманная погода в тонах апельсина\n39 = очень яркая погода\n40 в 42 = неясная погода в пурпурных/синих цветах\n43 = тёмные и едкие облака\n44 = чёрно-белое небо\n45 = пурпурное небо")
@@ -769,17 +790,23 @@ function imgui.OnDrawFrame()
         imgui.BeginChild('##4', imgui.ImVec2(275, 100), false)
 
         imgui.PushItemWidth(100)
-        imgui.InputInt(u8"Минимальная задержка", autoreconnect_min)
+        if imgui.InputInt(u8"Минимальная задержка", autoreconnect_min) then
+            savecfg()
+        end
         imgui.SameLine()
         imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Указывается в секундах")
 
         imgui.PushItemWidth(100)
-        imgui.InputInt(u8"Максимальная задержка", autoreconnect_max)
+        if imgui.InputInt(u8"Максимальная задержка", autoreconnect_max) then
+            savecfg()
+        end
         imgui.SameLine()
         imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Указывается в секундах")
         imgui.Separator()
 
-        imadd.ToggleButton('##5', autoreconnect_dont_reconnect)
+        if imadd.ToggleButton('##5', autoreconnect_dont_reconnect) then
+            savecfg()
+        end
         imgui.SameLine()
         imgui.Text(u8'Не переподключаться')
         imgui.SameLine()
@@ -788,13 +815,17 @@ function imgui.OnDrawFrame()
         imgui.Text(u8"От")
         imgui.SameLine()
         imgui.PushItemWidth(50)
-        imgui.SliderInt('##6', autoreconnect_dont_reconnect_hour_first, 0, 23)
+        if imgui.SliderInt('##6', autoreconnect_dont_reconnect_hour_first, 0, 23) then
+            savecfg()
+        end
         imgui.PopItemWidth()
         imgui.SameLine()
         imgui.Text(u8"До")
         imgui.SameLine()
         imgui.PushItemWidth(50)
-        imgui.SliderInt('##7', autoreconnect_dont_reconnect_hour_second, 0, 23)
+        if imgui.SliderInt('##7', autoreconnect_dont_reconnect_hour_second, 0, 23) then
+            savecfg()
+        end
         imgui.PopItemWidth()
         imgui.SameLine()
         imgui.Text(u8"часов.")
@@ -812,7 +843,6 @@ function imgui.OnDrawFrame()
 ---------- Основное окно ----------
     if main_window_state.v then
         renderDrawBox(0, 0, rx, ry, 0x50030303)
-        savecfg()
 
         imgui.SetNextWindowSize(imgui.ImVec2(375, 275), imgui.Cond.FirstUseEver)
         imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
@@ -864,7 +894,9 @@ function imgui.OnDrawFrame()
         if selected_window == 1 then
             imgui.BeginChild('##2', imgui.ImVec2(255, 240), false) --------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-            imadd.ToggleButton("##8", lavka_toggle)
+            if imadd.ToggleButton("##8", lavka_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Авто-Лавка")
             imgui.SameLine()
@@ -874,7 +906,9 @@ function imgui.OnDrawFrame()
                 lavka_settings_window_state.v = not lavka_settings_window_state.v
             end
 
-            imadd.ToggleButton("##14", timechange_toggle)
+            if imadd.ToggleButton("##14", timechange_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Изменение времени и погоды")
             imgui.SameLine()
@@ -882,7 +916,9 @@ function imgui.OnDrawFrame()
                 timechange_settings_window_state.v = not timechange_settings_window_state.v
             end
 
-            imadd.ToggleButton("##2281337", rlavka_toggle)
+            if imadd.ToggleButton("##2281337", rlavka_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Радиус лавок")
             imgui.SameLine()
@@ -890,18 +926,11 @@ function imgui.OnDrawFrame()
                 rlavka_settings_window_state.v = not rlavka_settings_window_state.v 
             end
 
-            imadd.ToggleButton('##7326', active_lavka)
+            if imadd.ToggleButton('##7326', active_lavka) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8'Поиск лавок')
-
-            imadd.ToggleButton("##25412", bank_toggle)
-            imgui.SameLine()
-            imgui.Text(u8"Авто PIN-код")
-            imgui.SameLine()
-            if imgui.Button(fa.ICON_FA_COGS .. "##251233") then
-                bank_settings_window_state.v = not bank_settings_window_state.v 
-            end
-
             -----------
             -----------
             -------------
@@ -913,18 +942,21 @@ function imgui.OnDrawFrame()
         elseif selected_window == 2 then
             imgui.BeginChild('##22', imgui.ImVec2(255, 240), false)
 
-            imadd.ToggleButton("##24", hotkey_toggle)
+            if imadd.ToggleButton("##24", hotkey_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Активация скрипта на клавишу")
             if imgui.HotKey("##23", main_window, _, 100) then
                 rkeys.changeHotKey(bind_main_window, main_window.v)
+                savecfg()
             end
 
             imgui.EndChild()
         elseif selected_window == 3 then
             imgui.BeginChild('##57', imgui.ImVec2(255, 240), false)
         
-            imgui.Text("/con")
+            imgui.Text("/vcon")
             imgui.SameLine()
             imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Подключение к выбранному серверу")
 
@@ -932,7 +964,9 @@ function imgui.OnDrawFrame()
         elseif selected_window == 4 then
             imgui.BeginChild('##74', imgui.ImVec2(255, 240), false)
 
-            imadd.ToggleButton("##3", autoreconnect_toggle)
+            if imadd.ToggleButton("##3", autoreconnect_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Авто-Реконнект")
             imgui.SameLine()
@@ -942,19 +976,26 @@ function imgui.OnDrawFrame()
                 autoreconnect_settings_window_state.v = not autoreconnect_settings_window_state.v
             end 
 
-            imadd.ToggleButton("##22312", anti_stock)
+            if imadd.ToggleButton("##22312", anti_stock) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Анти-Диалог с акциями")
             
-            imadd.ToggleButton("##39", box_toggle)
+            if imadd.ToggleButton("##39", box_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Авто-Открытие сундуков")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##40") then
                 box_settings_window_state.v = not box_settings_window_state.v
+                savecfg()
             end
 
-            imadd.ToggleButton("##16", addspawn_toggle)
+            if imadd.ToggleButton("##16", addspawn_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Авто выбор спавна")
             imgui.SameLine()
@@ -962,14 +1003,18 @@ function imgui.OnDrawFrame()
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##17") then
                 addspawn_settings_window_state.v = not addspawn_settings_window_state.v
+                savecfg()
             end
             
-            imadd.ToggleButton("##59", tg_toggle)
+            if imadd.ToggleButton("##59", tg_toggle) then
+                savecfg()
+            end
             imgui.SameLine()
             imgui.Text(u8"Уведомления в Telegram")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##60") then
                 tg_settings_window_state.v = not tg_settings_window_state.v
+                savecfg()
             end
             imgui.EndChild()
         end
@@ -1025,9 +1070,7 @@ function sampev.onServerMessage(color, text)
     end
 
     if tg_toggle.v and tg_payday.v then
-        if text:find("Организационная зарплата:") then
-            table.insert(tgpd, text)
-        elseif text:find("Текущая сумма в банке:") then
+        if text:find("Текущая сумма в банке:") then
             table.insert(tgpd, text)
         elseif text:find("Текущая сумма на депозите:") then
             table.insert(tgpd, text)
@@ -1063,23 +1106,6 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
         end)
     end
 
-    if bank_toggle.v then
-        lua_thread.create(function()
-            if text:find("Вы должны подтвердить") then
-                sampSendDialogResponse(id, 1, _, bank_pin.v)
-            end
-            local use = true
-            if text:find("код принят!") and use then
-                wait(50)
-                setVirtualKeyDown(13, true)
-                wait(50)
-                setVirtualKeyDown(13, false)
-                use = false
-            else
-                use = true
-            end
-        end)
-    end
     if anti_stock.v then
         if title:find("Акции на") then
             return false
@@ -1207,8 +1233,6 @@ function cfg_part_2()
     mainIni.autoreconnect.dont_reconnect_hour_first = autoreconnect_dont_reconnect_hour_first.v
     mainIni.autoreconnect.dont_reconnect_hour_second = autoreconnect_dont_reconnect_hour_second.v
 
-    mainIni.bank.pin = bank_pin.v
-    mainIni.bank.toggle = bank_toggle.v
     mainIni.lavk.toggle = active_lavka.v
     mainIni.stock.toggle = anti_stock.v
 
@@ -1217,11 +1241,11 @@ function cfg_part_2()
 end
 
 function onReceivePacket(id)
-    if id == 32 and tg_disconnect.v then 
+    if (id == 32 or id == 37) and tg_disconnect.v then 
         sendTelegramNotification("Вы были отключены от сервера!")
     end
-
-    if id == 32 and autoreconnect_toggle.v then
+    
+    if (id == 32 or id == 37) and autoreconnect_toggle.v then
         lua_thread.create(function()
             local ip, port = sampGetCurrentServerAddress()
             math.randomseed(os.clock())
@@ -1237,8 +1261,9 @@ function onReceivePacket(id)
                 end
             end
 
-            if id == 32 and canreconnecthr then 
-                 sampConnectToServer(ip, port)
+            if (id == 32 or id == 37) and canreconnecthr then
+                ip,port = sampGetCurrentServerAddress()
+                sampConnectToServer(ip, port)
             else
                 sampAddChatMessage(tag .. textcolor .. "Нельзя в это время!", tagcolor)
             end
