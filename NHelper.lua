@@ -1070,13 +1070,13 @@ function sampev.onServerMessage(color, text)
     end
 
     if tg_toggle.v and tg_payday.v then
-        if text:find("Текущая сумма в банке:") then
+        if text:find("Текущая сумма в банке") then
             table.insert(tgpd, text)
-        elseif text:find("Текущая сумма на депозите:") then
+        elseif text:find("Текущая сумма на депозите") then
             table.insert(tgpd, text)
-        elseif text:find("Общая заработная плата:") then
+        elseif text:find("Общая заработная плата") then
             table.insert(tgpd, text)
-        elseif text:find("Баланс на донат-счет:") then
+        elseif text:find("Баланс на донат.счет") then
             table.insert(tgpd, text)
         elseif text:find("В данный момент у вас") then
             table.insert(tgpd, text)
