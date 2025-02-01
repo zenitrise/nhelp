@@ -1,16 +1,17 @@
 script_name("N Helper")
 script_author("zenitrise")
 
----------- Пермиенные для текста -----------
+---------- Перменные для текста -----------
 
 local tag = "[N Helper] "
 local tagcolor = 0x20f271
 local textcolor = "{DCDCDC}"
 local warncolor = "{9c9c9c}"
 
+local paydaytext = ''
 ---------- Авто-Обновление ----------
 
-local script_vers = 41
+local script_vers = 45
 local script_vers_text = "3.99"
 local dlstatus = require("moonloader").download_status
 local update_status = false
@@ -316,7 +317,7 @@ function main()
             elseif tonumber(updateIni.update.vers) == script_vers then
                 sampAddChatMessage(tag .. textcolor .. "Скрипт успешно загружен, обновлений не обнаружено!", tagcolor)
                 sampAddChatMessage(tag .. textcolor .. "Автор скрипта: " .. warncolor .. "Zenitrise" .. textcolor .. ".", tagcolor)
-                sampAddChatMessage(tag .. textcolor .. "Активация скрипта: " .. warncolor .. "/nhelp " .. textcolor .. "или " .. warncolor .. table.concat(rkeys.getKeysName(main_window.v), " + ") , tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "Активация скрипта: " .. warncolor .. "/nhelp " .. textcolor, tagcolor)
             end
             os.remove(update_path)
         end
@@ -332,6 +333,7 @@ function main()
     sampRegisterChatCommand("nhelp", nhelp_cmd)
     sampRegisterChatCommand("open", box_open_now)
     sampRegisterChatCommand("kickme",function()
+    -- sampRegisterChatCommand('vcon', vcon_cmd)
             
         setCharCoordinates(PLAYER_PED, 500, 500, 500)
     
@@ -440,11 +442,10 @@ function main()
 end
 
 function tg_settings()
-    imgui.SetNextWindowSize(imgui.ImVec2(450, 240), imgui.Cond.FirstUseEver)
+    imgui.SetNextWindowSize(imgui.ImVec2(435, 200), imgui.Cond.FirstUseEver)
     imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
     imgui.Begin(u8"Настройки Telegram", tg_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
-    imgui.BeginChild('##61', imgui.ImVec2(435, 230), false)
 
     imgui.PushItemWidth(340)
     if imgui.InputText("Bot Token", token) then
@@ -493,7 +494,6 @@ function tg_settings()
     imgui.Text(u8"Pay Day")
 
 
-    imgui.EndChild()
     imgui.End()
 end
 
@@ -1050,44 +1050,47 @@ end
 
 function sampev.onServerMessage(color, text)
     if tg_toggle.v and tg_box.v then
-        if text:match("Вы использовали") then
+        if text:match("Вы использовали") and color == -65281 then
             sendTelegramNotification(tag .. text)
         end
     end
 
     if tg_toggle.v and tg_cr.v then
-        if text:find("Вы купили") then
+        if text:find("Вы купили") and color == -65281 then
             sendTelegramNotification(tag .. text)
-        elseif text:find("купил у вас") then
+        elseif text:find("купил у вас") and color == -65281 then
             sendTelegramNotification(tag .. text)
         end
     end
 
     if tg_toggle.v and tg_perevod.v then
-        if text:find("Вам поступил перевод") then
+        if text:match("^Вам поступил перевод на ваш счет в размере $(%d+) от жителя (.-).%d+.") and color == -65281 then
             sendTelegramNotification(tag .. text)
         end
     end
 
     if tg_toggle.v and tg_payday.v then
-        if text:find("Текущая сумма в банке") then
-            table.insert(tgpd, text)
-        elseif text:find("Текущая сумма на депозите") then
-            table.insert(tgpd, text)
-        elseif text:find("Общая заработная плата") then
-            table.insert(tgpd, text)
-        elseif text:find("Баланс на донат.счет") then
-            table.insert(tgpd, text)
-        elseif text:find("В данный момент у вас") then
-            table.insert(tgpd, text)
-            table.insert(tgpd, " ")
-            table.insert(tgpd, "===========================")
-            sendTelegramNotification(table.concat(tgpd, "\n"))
-            tgpd = {"========== Pay Day ==========", " "}
-
+        if text == '__________________________________________________________________________' and color == 1941201407 then
+            paydaytext = paydaytext..'\n'..text
+            sendTelegramNotification('Прошел пейдей! Вот статистика за пейдей! \n' ..paydaytext)
+            paydaytext = ''
+            return {color, text}
+        end
+        
+        if paydaytext ~= '' then
+            paydaytext = paydaytext..'\n'..text
+            return {color, text}
+        end
+        
+        if text == '______________________________Банковский чек______________________________' and color == 1941201407 then
+            paydaytext = paydaytext..'\n'..text
         end
     end
 end
+
+
+
+
 ----- Авто лавка и автоспавн
 function sampev.onShowDialog(id, style, title, b1, b2, text)
     if lavka_toggle.v then
