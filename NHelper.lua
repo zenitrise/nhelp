@@ -11,8 +11,8 @@ local warncolor = "{9c9c9c}"
 local paydaytext = ''
 ---------- Авто-Обновление ----------
 
-local script_vers = 45
-local script_vers_text = "3.99"
+local script_vers = 46
+local script_vers_text = "3.9"
 local dlstatus = require("moonloader").download_status
 local update_status = false
 local download_lib = false
@@ -212,7 +212,6 @@ end
 
 rx, ry = getScreenResolution()
 local falpha = 0.01
-local font = renderCreateFont("Arial", mainIni.render.width_text, 5)
 local colors = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"}
 
 --- hotkey
