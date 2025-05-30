@@ -1,7 +1,7 @@
 script_name("N Helper")
 script_author("zenitrise")
 
----------- Перменные для текста -----------
+---------- ГЏГҐГ°Г¬ГҐГ­Г­Г»ГҐ Г¤Г«Гї ГІГҐГЄГ±ГІГ  -----------
 
 local tag = "[N Helper] "
 local tagcolor = 0x20f271
@@ -9,9 +9,9 @@ local textcolor = "{DCDCDC}"
 local warncolor = "{9c9c9c}"
 
 local paydaytext = ''
----------- Авто-Обновление ----------
+---------- ГЂГўГІГ®-ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ----------
 
-local script_vers = 46
+local script_vers = 47
 local script_vers_text = "3.9"
 local dlstatus = require("moonloader").download_status
 local update_status = false
@@ -43,7 +43,7 @@ local rkeys_path = "moonloader/lib/rkeys.lua"
 
 local vkeys_url = "https://raw.githubusercontent.com/zenitrise/nhelp/main/vkeys.lua"
 local vkeys_path = "moonloader/lib/vkeys.lua"
------------ Подгрузка библиотек и дерикторий ---------
+----------- ГЏГ®Г¤ГЈГ°ГіГ§ГЄГ  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄ ГЁ Г¤ГҐГ°ГЁГЄГІГ®Г°ГЁГ© ---------
 
 if not doesDirectoryExist("moonloader/lib") then
     createDirectory("moonloader/lib")
@@ -59,43 +59,43 @@ end
 
 if not doesFileExist(fa5_path) then
     downloadUrlToFile(fa5_url, fa5_path)
-    sampAddChatMessage(tag .. textcolor .. "У вас не загружена библиотека " .. warncolor .. "Font Awesome 5 " .. textcolor .. "Начинаю загрузку..", tagcolor)
+    sampAddChatMessage(tag .. textcolor .. "Г“ ГўГ Г± Г­ГҐ Г§Г ГЈГ°ГіГ¦ГҐГ­Г  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  " .. warncolor .. "Font Awesome 5 " .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ Г§Г ГЈГ°ГіГ§ГЄГі..", tagcolor)
     download_lib = true
 end
 
 if not doesFileExist(font_path) then
     downloadUrlToFile(font_url, font_path)
-    sampAddChatMessage(tag .. textcolor .. "У вас не загружены шрифты для библиотеки " .. warncolor .. "Font Awesome 5 " .. textcolor .. "Начинаю загрузку..", tagcolor)
+    sampAddChatMessage(tag .. textcolor .. "Г“ ГўГ Г± Г­ГҐ Г§Г ГЈГ°ГіГ¦ГҐГ­Г» ГёГ°ГЁГґГІГ» Г¤Г«Гї ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГЁ " .. warncolor .. "Font Awesome 5 " .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ Г§Г ГЈГ°ГіГ§ГЄГі..", tagcolor)
     download_lib = true
 end
 
 if not doesFileExist(encoding_path) then
     downloadUrlToFile(encoding_url, encoding_path)
-    sampAddChatMessage(tag .. textcolor .. "У вас не загружена библиотека " .. warncolor .. "Encoding " .. textcolor .. "Начинаю загрузку..", tagcolor)
+    sampAddChatMessage(tag .. textcolor .. "Г“ ГўГ Г± Г­ГҐ Г§Г ГЈГ°ГіГ¦ГҐГ­Г  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  " .. warncolor .. "Encoding " .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ Г§Г ГЈГ°ГіГ§ГЄГі..", tagcolor)
     download_lib = true
 end
 
 if not doesFileExist(vkeys_path) then
     downloadUrlToFile(vkeys_url, vkeys_path)
-    sampAddChatMessage(tag .. textcolor .. "У вас не загружена библиотека " .. warncolor .. "VKeys " .. textcolor .. "Начинаю загрузку..", tagcolor)
+    sampAddChatMessage(tag .. textcolor .. "Г“ ГўГ Г± Г­ГҐ Г§Г ГЈГ°ГіГ¦ГҐГ­Г  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  " .. warncolor .. "VKeys " .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ Г§Г ГЈГ°ГіГ§ГЄГі..", tagcolor)
     download_lib = true
 end
 
 if not doesFileExist(imgui_path) then
     downloadUrlToFile(imgui_url, imgui_path)
-    sampAddChatMessage(tag .. textcolor .. "У вас не загружена библиотека " .. warncolor .. "ImGui " .. textcolor .. "Начинаю загрузку..", tagcolor)
+    sampAddChatMessage(tag .. textcolor .. "Г“ ГўГ Г± Г­ГҐ Г§Г ГЈГ°ГіГ¦ГҐГ­Г  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  " .. warncolor .. "ImGui " .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ Г§Г ГЈГ°ГіГ§ГЄГі..", tagcolor)
     download_lib = true
 end
 
 if not doesFileExist(imguiadd_path) then
     downloadUrlToFile(imguiadd_url, imguiadd_path)
-    sampAddChatMessage(tag .. textcolor .. "У вас не загружена библиотека " .. warncolor .. "ImGui Addons " .. textcolor .. "Начинаю загрузку..", tagcolor)
+    sampAddChatMessage(tag .. textcolor .. "Г“ ГўГ Г± Г­ГҐ Г§Г ГЈГ°ГіГ¦ГҐГ­Г  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  " .. warncolor .. "ImGui Addons " .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ Г§Г ГЈГ°ГіГ§ГЄГі..", tagcolor)
     download_lib = true
 end
 
 if not doesFileExist(rkeys_path) then
     downloadUrlToFile(rkeys_url, rkeys_path)
-    sampAddChatMessage(tag .. textcolor .. "У вас не загружена библиотека " .. warncolor .. "RKeys " .. textcolor .. "Начинаю загрузку..", tagcolor)
+    sampAddChatMessage(tag .. textcolor .. "Г“ ГўГ Г± Г­ГҐ Г§Г ГЈГ°ГіГ¦ГҐГ­Г  ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  " .. warncolor .. "RKeys " .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ Г§Г ГЈГ°ГіГ§ГЄГі..", tagcolor)
     download_lib = true
 end
 
@@ -104,7 +104,7 @@ if download_lib then
 end
 
 --------------------
----------- Библиотеки ----------
+---------- ГЃГЁГЎГ«ГЁГ®ГІГҐГЄГЁ ----------
 
 require "lib.moonloader"
 
@@ -135,7 +135,7 @@ u8 = encoding.UTF8
 
 imgui.HotKey = require("imgui_addons").HotKey
 
----------- Подгрузка, настройка .ini ----------
+---------- ГЏГ®Г¤ГЈГ°ГіГ§ГЄГ , Г­Г Г±ГІГ°Г®Г©ГЄГ  .ini ----------
 
 local directIni = "NHelper.ini"
 local mainIni = inicfg.load({
@@ -208,7 +208,7 @@ end
 
 
 
----------- Переменные, массивы ----------
+---------- ГЏГҐГ°ГҐГ¬ГҐГ­Г­Г»ГҐ, Г¬Г Г±Г±ГЁГўГ» ----------
 
 rx, ry = getScreenResolution()
 local falpha = 0.01
@@ -224,9 +224,9 @@ local main_window = {
 local selected_window = 1
 
 local tg_toggle = imgui.ImBool(mainIni.tg.toggle)
-local token = imgui.ImBuffer(mainIni.tg.token, 512) -- токен бота
+local token = imgui.ImBuffer(mainIni.tg.token, 512) -- ГІГ®ГЄГҐГ­ ГЎГ®ГІГ 
 local chat_id = imgui.ImBuffer(tostring(mainIni.tg.id), 512)
-local updateid -- ID последнего сообщения для того чтобы не было флуда
+local updateid -- ID ГЇГ®Г±Г«ГҐГ¤Г­ГҐГЈГ® Г±Г®Г®ГЎГ№ГҐГ­ГЁГї Г¤Г«Гї ГІГ®ГЈГ® Г·ГІГ®ГЎГ» Г­ГҐ ГЎГ»Г«Г® ГґГ«ГіГ¤Г 
 local tg_box = imgui.ImBool(mainIni.tg.box)
 local tg_cr = imgui.ImBool(mainIni.tg.cr)
 local tg_perevod = imgui.ImBool(mainIni.tg.perevod)
@@ -304,19 +304,19 @@ function main()
     if not isSampfuncsLoaded() or not isSampLoaded() then return end
     while not isSampAvailable() do wait(100) end
 
-    ---------- Авто-Обновление ----------
+    ---------- ГЂГўГІГ®-ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ----------
 
     downloadUrlToFile(update_url, update_path, function(id, status)
         if status == dlstatus.STATUS_ENDDOWNLOADDATA then
             updateIni = inicfg.load(nil, update_path)
             if tonumber(updateIni.update.vers) > script_vers then
-                sampAddChatMessage(tag .. textcolor .. "Обнаружено обновление! Старая версия: " .. warncolor .. script_vers_text .. textcolor .. " Новая версия: " .. warncolor .. updateIni.update.vers_text, tagcolor)
-                sampAddChatMessage(tag .. textcolor .. "Начинаю установку обновления " .. warncolor .. updateIni.update.vers_text .. textcolor .. "..", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "ГЋГЎГ­Г Г°ГіГ¦ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ! Г‘ГІГ Г°Г Гї ГўГҐГ°Г±ГЁГї: " .. warncolor .. script_vers_text .. textcolor .. " ГЌГ®ГўГ Гї ГўГҐГ°Г±ГЁГї: " .. warncolor .. updateIni.update.vers_text, tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "ГЌГ Г·ГЁГ­Г Гѕ ГіГ±ГІГ Г­Г®ГўГЄГі Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГї " .. warncolor .. updateIni.update.vers_text .. textcolor .. "..", tagcolor)
                 update_status = true
             elseif tonumber(updateIni.update.vers) == script_vers then
-                sampAddChatMessage(tag .. textcolor .. "Скрипт успешно загружен, обновлений не обнаружено!", tagcolor)
-                sampAddChatMessage(tag .. textcolor .. "Автор скрипта: " .. warncolor .. "Zenitrise" .. textcolor .. ".", tagcolor)
-                sampAddChatMessage(tag .. textcolor .. "Активация скрипта: " .. warncolor .. "/nhelp " .. textcolor, tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "Г‘ГЄГ°ГЁГЇГІ ГіГ±ГЇГҐГёГ­Г® Г§Г ГЈГ°ГіГ¦ГҐГ­, Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГ© Г­ГҐ Г®ГЎГ­Г Г°ГіГ¦ГҐГ­Г®!", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "ГЂГўГІГ®Г° Г±ГЄГ°ГЁГЇГІГ : " .. warncolor .. "Zenitrise" .. textcolor .. ".", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "ГЂГЄГІГЁГўГ Г¶ГЁГї Г±ГЄГ°ГЁГЇГІГ : " .. warncolor .. "/nhelp " .. textcolor, tagcolor)
             end
             os.remove(update_path)
         end
@@ -342,7 +342,7 @@ function main()
     theme()
     while true do 
         wait(0)
-        -- Поиск лавок
+        -- ГЏГ®ГЁГ±ГЄ Г«Г ГўГ®ГЄ
 
         if active_lavka.v then
             local lavki = 0
@@ -354,7 +354,7 @@ function main()
                         if isPointOnScreen(posX, posY, posZ, nil) then
                             local pX, pY = convert3DCoordsToScreen(getCharCoordinates(PLAYER_PED))
                             local lX, lY = convert3DCoordsToScreen(posX, posY, posZ)
-                            renderFontDrawText(font, 'Свободна', lX - 30, lY - 20, 0xFF16C910, 0x90000000)
+                            renderFontDrawText(font, 'Г‘ГўГ®ГЎГ®Г¤Г­Г ', lX - 30, lY - 20, 0xFF16C910, 0x90000000)
                             renderDrawLine(pX, pY, lX, lY, 1, 0xFF52FF4D)
                             renderDrawPolygon(pX, pY, 10, 10, 10, 0, 0xFFFFFFFF)
                             renderDrawPolygon(lX, lY, 10, 10, 10, 0, 0xFFFFFFFF)
@@ -366,13 +366,13 @@ function main()
             local input = getStructElement(input, 0x8, 4)
             local PosX = getStructElement(input, 0x8, 4)
             local PosY = getStructElement(input, 0xC, 4)
-            renderFontDrawText(font, 'Свободно лавок: '..lavki, PosX, PosY + 80, 0xFFFFFFFF, 0x90000000)
+            renderFontDrawText(font, 'Г‘ГўГ®ГЎГ®Г¤Г­Г® Г«Г ГўГ®ГЄ: '..lavki, PosX, PosY + 80, 0xFFFFFFFF, 0x90000000)
         end
     
 
 
 
-        --- сундуки
+        --- Г±ГіГ­Г¤ГіГЄГЁ
         if box_toggle.v and not work then
             work = true
             box_open()
@@ -389,7 +389,7 @@ function main()
 					--local X, Y = convert3DCoordsToScreen(posX, posY, posZ)
 					--renderFontDrawText(font, dist, X, Y, 0xFFFFFFFF)
 
-	                if text:find('^%w+_%w+ .+ товар$') and dist <= rlavka_radius.v then
+	                if text:find('^%w+_%w+ .+ ГІГ®ГўГ Г°$') and dist <= rlavka_radius.v then
 	                    local nick = text:match('^(%S+)')
 	                    local id = -1
 	                    for i = 1,1000 do
@@ -420,18 +420,18 @@ function main()
 	        end
         end
 
-        ----- Изменение времени
+        ----- Г€Г§Г¬ГҐГ­ГҐГ­ГЁГҐ ГўГ°ГҐГ¬ГҐГ­ГЁ
         if timechange_toggle.v then
             setTime()
             setWeather()
         end
 
-        ---------- Авто-Обновление ----------
+        ---------- ГЂГўГІГ®-ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ ----------
 
         if update_status then
             downloadUrlToFile(script_url, script_path, function(id, status)
                 if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-                    sampAddChatMessage(tag .. textcolor .. "Скрипт успешно обновлен!", tagcolor)
+                    sampAddChatMessage(tag .. textcolor .. "Г‘ГЄГ°ГЁГЇГІ ГіГ±ГЇГҐГёГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­!", tagcolor)
                     thisScript():reload()
                 end
             end)
@@ -444,7 +444,7 @@ function tg_settings()
     imgui.SetNextWindowSize(imgui.ImVec2(435, 200), imgui.Cond.FirstUseEver)
     imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
-    imgui.Begin(u8"Настройки Telegram", tg_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+    imgui.Begin(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ Telegram", tg_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
 
     imgui.PushItemWidth(340)
     if imgui.InputText("Bot Token", token) then
@@ -455,37 +455,37 @@ function tg_settings()
     if imgui.InputText("User ID", chat_id) then
         savecfg()
     end
-    if imgui.Button(u8"Проверить##66") then
-        sampAddChatMessage(tag .. textcolor .. "Отправляю уведомление в " .. warncolor .. "Telegram" .. textcolor .. "..", tagcolor)
-        sendTelegramNotification(tag .. "Я живой!")
+    if imgui.Button(u8"ГЏГ°Г®ГўГҐГ°ГЁГІГј##66") then
+        sampAddChatMessage(tag .. textcolor .. "ГЋГІГЇГ°Г ГўГ«ГїГѕ ГіГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ Гў " .. warncolor .. "Telegram" .. textcolor .. "..", tagcolor)
+        sendTelegramNotification(tag .. "Гџ Г¦ГЁГўГ®Г©!")
     end
     imgui.Separator()
-    imgui.Text(u8"Уведомления:")
+    imgui.Text(u8"Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГї:")
     imgui.Separator()
 
     if imadd.ToggleButton("##66", tg_perevod) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Переводы")
+    imgui.Text(u8"ГЏГҐГ°ГҐГўГ®Г¤Г»")
 
     if imadd.ToggleButton("##62", tg_box) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Призы из сундуков")
+    imgui.Text(u8"ГЏГ°ГЁГ§Г» ГЁГ§ Г±ГіГ­Г¤ГіГЄГ®Гў")
 
     if imadd.ToggleButton("##63", tg_cr) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Покупка/Продажа на ЦР")
+    imgui.Text(u8"ГЏГ®ГЄГіГЇГЄГ /ГЏГ°Г®Г¤Г Г¦Г  Г­Г  Г–Гђ")
 
     if imadd.ToggleButton("##64", tg_disconnect) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Отключение от сервера")
+    imgui.Text(u8"ГЋГІГЄГ«ГѕГ·ГҐГ­ГЁГҐ Г®ГІ Г±ГҐГ°ГўГҐГ°Г ")
     if imadd.ToggleButton("##65", tg_payday) then
         savecfg()
     end
@@ -500,11 +500,11 @@ function rlavka_settings()
     imgui.SetNextWindowSize(imgui.ImVec2(220, 70), imgui.Cond.FirstUseEver)
     imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
-    imgui.Begin(u8"Настройки rlavk`и", rlavka_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+    imgui.Begin(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ rlavk`ГЁ", rlavka_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
     imgui.BeginChild('##38282', imgui.ImVec2(205, 35), false)
 
     imgui.PushItemWidth(70)
-    if imgui.SliderInt(u8'Радиус отображения', rlavka_radius, 5, 50) then
+    if imgui.SliderInt(u8'ГђГ Г¤ГЁГіГ± Г®ГІГ®ГЎГ°Г Г¦ГҐГ­ГЁГї', rlavka_radius, 5, 50) then
         savecfg()
     end
 
@@ -516,62 +516,62 @@ function box_settings()
     imgui.SetNextWindowSize(imgui.ImVec2(320, 245), imgui.Cond.FirstUseEver)
     imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
-    imgui.Begin(u8"Настройки Авто-Открытия сундуков", box_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+    imgui.Begin(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГЂГўГІГ®-ГЋГІГЄГ°Г»ГІГЁГї Г±ГіГ­Г¤ГіГЄГ®Гў", box_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
     imgui.BeginChild('##41', imgui.ImVec2(305, 210), false)
 
     if imadd.ToggleButton("##42", box_roulette) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Сундук рулетки")
+    imgui.Text(u8"Г‘ГіГ­Г¤ГіГЄ Г°ГіГ«ГҐГІГЄГЁ")
 
     if imadd.ToggleButton("##43", box_platina) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Платиновый сундук")
+    imgui.Text(u8"ГЏГ«Г ГІГЁГ­Г®ГўГ»Г© Г±ГіГ­Г¤ГіГЄ")
 
     if imadd.ToggleButton("##44", box_donate) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Донатный сундук")
+    imgui.Text(u8"Г„Г®Г­Г ГІГ­Г»Г© Г±ГіГ­Г¤ГіГЄ")
 
     if imadd.ToggleButton("##45", box_elonmusk) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Тайник Илона Маска")
+    imgui.Text(u8"Г’Г Г©Г­ГЁГЄ Г€Г«Г®Г­Г  ГЊГ Г±ГЄГ ")
 
     if imadd.ToggleButton("##46", box_lossantos) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Тайник Лос-Сантоса")
+    imgui.Text(u8"Г’Г Г©Г­ГЁГЄ Г‹Г®Г±-Г‘Г Г­ГІГ®Г±Г ")
 
     if imadd.ToggleButton("##452123", box_vicecity) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.Text(u8"Тайник Vice-City")
+    imgui.Text(u8"Г’Г Г©Г­ГЁГЄ Vice-City")
     imgui.Separator()
 
     imgui.PushItemWidth(100)
-    if imgui.InputInt(u8"Минимальная задержка##47", box_open_delay_min) then
+    if imgui.InputInt(u8"ГЊГЁГ­ГЁГ¬Г Г«ГјГ­Г Гї Г§Г Г¤ГҐГ°Г¦ГЄГ ##47", box_open_delay_min) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Рандомная адержка между открытием инвентаря\nв минутах") 
-    if imgui.InputInt(u8"Максимальная задержка##48", box_open_delay_max) then
+    imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГђГ Г­Г¤Г®Г¬Г­Г Гї Г Г¤ГҐГ°Г¦ГЄГ  Г¬ГҐГ¦Г¤Гі Г®ГІГЄГ°Г»ГІГЁГҐГ¬ ГЁГ­ГўГҐГ­ГІГ Г°Гї\nГў Г¬ГЁГ­ГіГІГ Гµ") 
+    if imgui.InputInt(u8"ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г Гї Г§Г Г¤ГҐГ°Г¦ГЄГ ##48", box_open_delay_max) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Рандомная адержка между открытием инвентаря\nв минутах")
-    if imgui.InputInt(u8"Задержка между действиями##49", box_do_delay  ) then
+    imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГђГ Г­Г¤Г®Г¬Г­Г Гї Г Г¤ГҐГ°Г¦ГЄГ  Г¬ГҐГ¦Г¤Гі Г®ГІГЄГ°Г»ГІГЁГҐГ¬ ГЁГ­ГўГҐГ­ГІГ Г°Гї\nГў Г¬ГЁГ­ГіГІГ Гµ")
+    if imgui.InputInt(u8"Г‡Г Г¤ГҐГ°Г¦ГЄГ  Г¬ГҐГ¦Г¤Гі Г¤ГҐГ©Г±ГІГўГЁГїГ¬ГЁ##49", box_do_delay  ) then
         savecfg()
     end
     imgui.SameLine()
-    imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Задержка между действиями (открыть сундук, нажать кнопку\nзакрыть инвентарь), в секундах")
+    imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Г‡Г Г¤ГҐГ°Г¦ГЄГ  Г¬ГҐГ¦Г¤Гі Г¤ГҐГ©Г±ГІГўГЁГїГ¬ГЁ (Г®ГІГЄГ°Г»ГІГј Г±ГіГ­Г¤ГіГЄ, Г­Г Г¦Г ГІГј ГЄГ­Г®ГЇГЄГі\nГ§Г ГЄГ°Г»ГІГј ГЁГ­ГўГҐГ­ГІГ Г°Гј), Гў Г±ГҐГЄГіГ­Г¤Г Гµ")
 
     imgui.EndChild()
     imgui.End()
@@ -581,93 +581,93 @@ function lavka_settings()
         imgui.SetNextWindowSize(imgui.ImVec2(300, 400), imgui.Cond.FirstUseEver)
         imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
-        imgui.Begin(u8"Настройка Авто-Лавки", lavka_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+        imgui.Begin(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГ  ГЂГўГІГ®-Г‹Г ГўГЄГЁ", lavka_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
         imgui.BeginChild('##11', imgui.ImVec2(285, 365), false)
 
         imgui.PushItemWidth(150)
-        if imgui.InputText(u8'Название лавки', lavka_name) then
+        if imgui.InputText(u8'ГЌГ Г§ГўГ Г­ГЁГҐ Г«Г ГўГЄГЁ', lavka_name) then
             savecfg()
         end
         imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Название должно быть от 3 до 20 символов включительно.")
-        if imgui.Button(u8'Проверить название##12') then
+        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГЌГ Г§ГўГ Г­ГЁГҐ Г¤Г®Г«Г¦Г­Г® ГЎГ»ГІГј Г®ГІ 3 Г¤Г® 20 Г±ГЁГ¬ГўГ®Г«Г®Гў ГўГЄГ«ГѕГ·ГЁГІГҐГ«ГјГ­Г®.")
+        if imgui.Button(u8'ГЏГ°Г®ГўГҐГ°ГЁГІГј Г­Г Г§ГўГ Г­ГЁГҐ##12') then
             local textvalue = #lavka_name.v
             if textvalue < 3 or textvalue > 20 then
-                sampAddChatMessage(tag .. textcolor .. "Название должно быть от 3 до 20 символов включительно.", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "ГЌГ Г§ГўГ Г­ГЁГҐ Г¤Г®Г«Г¦Г­Г® ГЎГ»ГІГј Г®ГІ 3 Г¤Г® 20 Г±ГЁГ¬ГўГ®Г«Г®Гў ГўГЄГ«ГѕГ·ГЁГІГҐГ«ГјГ­Г®.", tagcolor)
                 lavka_name.v = "N Helper"
             else
-                sampAddChatMessage(tag .. textcolor .. "Все верно!", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "Г‚Г±ГҐ ГўГҐГ°Г­Г®!", tagcolor)
             end
         end
         imgui.Separator()
 
         imgui.PushItemWidth(100)
-        if imgui.Combo(u8'Выбор цвета##13', lavka_color, colors, #colors) then
+        if imgui.Combo(u8'Г‚Г»ГЎГ®Г° Г¶ГўГҐГІГ ##13', lavka_color, colors, #colors) then
             savecfg()
         end
         imgui.Separator()
 
-        imgui.Text(u8'1 цвет:') 
+        imgui.Text(u8'1 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.91, 0.31, 0.31, 1), lavka_name.v)
 
-        imgui.Text(u8'2 цвет:') 
+        imgui.Text(u8'2 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.91, 0.31, 0.75, 1), lavka_name.v)
 
-        imgui.Text(u8'3 цвет:') 
+        imgui.Text(u8'3 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.71, 0.31, 0.91, 1), lavka_name.v)
 
-        imgui.Text(u8'4 цвет:') 
+        imgui.Text(u8'4 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.4, 0.31, 0.91, 1), lavka_name.v)
 
-        imgui.Text(u8'5 цвет:') 
+        imgui.Text(u8'5 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.31, 0.62, 0.91, 1), lavka_name.v)
 
-        imgui.Text(u8'6 цвет:') 
+        imgui.Text(u8'6 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.31, 0.84, 0.91, 1), lavka_name.v)
 
-        imgui.Text(u8'7 цвет:') 
+        imgui.Text(u8'7 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.31, 0.91, 0.64, 1), lavka_name.v)
 
-        imgui.Text(u8'8 цвет:') 
+        imgui.Text(u8'8 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.31, 0.91, 0.38, 1), lavka_name.v)
 
-        imgui.Text(u8'9 цвет:') 
+        imgui.Text(u8'9 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.62, 0.91, 0.31, 1), lavka_name.v)
 
-        imgui.Text(u8'10 цвет:') 
+        imgui.Text(u8'10 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.82, 0.91, 0.31, 1), lavka_name.v)
 
-        imgui.Text(u8'11 цвет:') 
+        imgui.Text(u8'11 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.91, 0.74, 0.31, 1), lavka_name.v)
 
-        imgui.Text(u8'12 цвет:') 
+        imgui.Text(u8'12 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.91, 0.52, 0.31, 1), lavka_name.v)
 
-        imgui.Text(u8'13 цвет:') 
+        imgui.Text(u8'13 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.65, 0.19, 0.19, 1), lavka_name.v)
 
-        imgui.Text(u8'14 цвет:') 
+        imgui.Text(u8'14 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.19, 0.25, 0.65, 1), lavka_name.v)
 
-        imgui.Text(u8'15 цвет:') 
+        imgui.Text(u8'15 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(0.19, 0.65, 0.25, 1), lavka_name.v)
 
-        imgui.Text(u8'16 цвет:') 
+        imgui.Text(u8'16 Г¶ГўГҐГІ:') 
         imgui.SameLine()
         imgui.TextColored(imgui.ImVec4(1, 1, 1, 1), lavka_name.v)
 
@@ -694,7 +694,7 @@ function imgui.OnDrawFrame()
         rlavka_settings()
     end
 
------ Настройки яшиков
+----- ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГїГёГЁГЄГ®Гў
     if box_settings_window_state.v then
         box_settings()
     end
@@ -710,34 +710,34 @@ function imgui.OnDrawFrame()
         autoreconnect_settings_window_state.v = false
     end
 
-------------- Автовыбор спавна -----------
+------------- ГЂГўГІГ®ГўГ»ГЎГ®Г° Г±ГЇГ ГўГ­Г  -----------
     if addspawn_settings_window_state.v then
         imgui.SetNextWindowSize(imgui.ImVec2(230, 110), imgui.Cond.FirstUseEver)
         imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
-        imgui.Begin(u8"Настройки выбора спавна", addspawn_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+        imgui.Begin(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГўГ»ГЎГ®Г°Г  Г±ГЇГ ГўГ­Г ", addspawn_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
         imgui.BeginChild('##18', imgui.ImVec2(215, 75), false)
 
         imgui.PushItemWidth(70)
-        if imgui.InputInt(u8'Номер спавна', addspawn_id) then
+        if imgui.InputInt(u8'ГЌГ®Г¬ГҐГ° Г±ГЇГ ГўГ­Г ', addspawn_id) then
             savecfg()
         end
         imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Номер места, где вам нужно заспавниться.\nНа пример, если нужно выбрать: [1] Вокзал\nто выбирайте цифру 1")
+        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГЌГ®Г¬ГҐГ° Г¬ГҐГ±ГІГ , ГЈГ¤ГҐ ГўГ Г¬ Г­ГіГ¦Г­Г® Г§Г Г±ГЇГ ГўГ­ГЁГІГјГ±Гї.\nГЌГ  ГЇГ°ГЁГ¬ГҐГ°, ГҐГ±Г«ГЁ Г­ГіГ¦Г­Г® ГўГ»ГЎГ°Г ГІГј: [1] Г‚Г®ГЄГ§Г Г«\nГІГ® ГўГ»ГЎГЁГ°Г Г©ГІГҐ Г¶ГЁГґГ°Гі 1")
         imgui.Separator()
         if imadd.ToggleButton('##19', addspawn_waittoggle) then
             savecfg()
         end
         imgui.SameLine()
-        imgui.Text(u8"Задержка перед выбором")
+        imgui.Text(u8"Г‡Г Г¤ГҐГ°Г¦ГЄГ  ГЇГҐГ°ГҐГ¤ ГўГ»ГЎГ®Г°Г®Г¬")
         imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Задержка в секундах перед тем, как\nотправить ответ на диалог")
+        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Г‡Г Г¤ГҐГ°Г¦ГЄГ  Гў Г±ГҐГЄГіГ­Г¤Г Гµ ГЇГҐГ°ГҐГ¤ ГІГҐГ¬, ГЄГ ГЄ\nГ®ГІГЇГ°Г ГўГЁГІГј Г®ГІГўГҐГІ Г­Г  Г¤ГЁГ Г«Г®ГЈ")
         imgui.PushItemWidth(50)
         if imgui.InputInt('', addspawn_wait, 0, 0) then
             savecfg()
         end
         imgui.SameLine()
-        imgui.Text(u8'секунд')
+        imgui.Text(u8'Г±ГҐГЄГіГ­Г¤')
 
 
         imgui.EndChild()
@@ -746,31 +746,31 @@ function imgui.OnDrawFrame()
 
 
 
----------- Изменение времени и погоды --------------
+---------- Г€Г§Г¬ГҐГ­ГҐГ­ГЁГҐ ГўГ°ГҐГ¬ГҐГ­ГЁ ГЁ ГЇГ®ГЈГ®Г¤Г» --------------
     if timechange_settings_window_state.v then
         imgui.SetNextWindowSize(imgui.ImVec2(210, 110), imgui.Cond.FirstUseEver)
         imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
-        imgui.Begin(u8"Настройки времени и погоды", timechange_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+        imgui.Begin(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГўГ°ГҐГ¬ГҐГ­ГЁ ГЁ ГЇГ®ГЈГ®Г¤Г»", timechange_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
         imgui.BeginChild('##15', imgui.ImVec2(195, 75), false)
 
         imgui.PushItemWidth(100)
-        if imgui.SliderInt(u8'Часы', timechange_hours, 0, 23) then
+        if imgui.SliderInt(u8'Г—Г Г±Г»', timechange_hours, 0, 23) then
             savecfg()
         end
         imgui.PopItemWidth()
         imgui.PushItemWidth(100)
-        if imgui.SliderInt(u8'Минуты', timechange_minutes, 0, 59) then
+        if imgui.SliderInt(u8'ГЊГЁГ­ГіГІГ»', timechange_minutes, 0, 59) then
             savecfg()
         end
         imgui.PopItemWidth()
         imgui.PushItemWidth(100)
-        if imgui.SliderInt(u8'Погода', timechange_weather, 0, 45) then
+        if imgui.SliderInt(u8'ГЏГ®ГЈГ®Г¤Г ', timechange_weather, 0, 45) then
             savecfg()
         end
         imgui.PopItemWidth()
         imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"0 - 7 = несколько вариантов чистого синего неба\n08 = гроза\n09 = густой туман и пасмурно\n10 = ясное небо\n11 = дикое пекло\n12 - 15 = смуглая и неприятная погода\n16 = тусклая и дождливая\n17 - 18 = жара\n19 = песчаная буря\n20 = туманная погода\n21 = ночь с пурпурным небом\n22 = ночь с зеленоватым небом\n23 в 26 = изменения бледного апельсина\n27 в 29 = изменения свежий синие\n30 в 32 = изменения темного, неясного, чирка\n33 = вечер в коричневатых оттенках\n34 = погода с синими/пурпурными оттенками\n35 = тусклая и унылая погода в коричневых тонах\n36 в 38 = яркая и туманная погода в тонах апельсина\n39 = очень яркая погода\n40 в 42 = неясная погода в пурпурных/синих цветах\n43 = тёмные и едкие облака\n44 = чёрно-белое небо\n45 = пурпурное небо")
+        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"0 - 7 = Г­ГҐГ±ГЄГ®Г«ГјГЄГ® ГўГ Г°ГЁГ Г­ГІГ®Гў Г·ГЁГ±ГІГ®ГЈГ® Г±ГЁГ­ГҐГЈГ® Г­ГҐГЎГ \n08 = ГЈГ°Г®Г§Г \n09 = ГЈГіГ±ГІГ®Г© ГІГіГ¬Г Г­ ГЁ ГЇГ Г±Г¬ГіГ°Г­Г®\n10 = ГїГ±Г­Г®ГҐ Г­ГҐГЎГ®\n11 = Г¤ГЁГЄГ®ГҐ ГЇГҐГЄГ«Г®\n12 - 15 = Г±Г¬ГіГЈГ«Г Гї ГЁ Г­ГҐГЇГ°ГЁГїГІГ­Г Гї ГЇГ®ГЈГ®Г¤Г \n16 = ГІГіГ±ГЄГ«Г Гї ГЁ Г¤Г®Г¦Г¤Г«ГЁГўГ Гї\n17 - 18 = Г¦Г Г°Г \n19 = ГЇГҐГ±Г·Г Г­Г Гї ГЎГіГ°Гї\n20 = ГІГіГ¬Г Г­Г­Г Гї ГЇГ®ГЈГ®Г¤Г \n21 = Г­Г®Г·Гј Г± ГЇГіГ°ГЇГіГ°Г­Г»Г¬ Г­ГҐГЎГ®Г¬\n22 = Г­Г®Г·Гј Г± Г§ГҐГ«ГҐГ­Г®ГўГ ГІГ»Г¬ Г­ГҐГЎГ®Г¬\n23 Гў 26 = ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї ГЎГ«ГҐГ¤Г­Г®ГЈГ® Г ГЇГҐГ«ГјГ±ГЁГ­Г \n27 Гў 29 = ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї Г±ГўГҐГ¦ГЁГ© Г±ГЁГ­ГЁГҐ\n30 Гў 32 = ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї ГІГҐГ¬Г­Г®ГЈГ®, Г­ГҐГїГ±Г­Г®ГЈГ®, Г·ГЁГ°ГЄГ \n33 = ГўГҐГ·ГҐГ° Гў ГЄГ®Г°ГЁГ·Г­ГҐГўГ ГІГ»Гµ Г®ГІГІГҐГ­ГЄГ Гµ\n34 = ГЇГ®ГЈГ®Г¤Г  Г± Г±ГЁГ­ГЁГ¬ГЁ/ГЇГіГ°ГЇГіГ°Г­Г»Г¬ГЁ Г®ГІГІГҐГ­ГЄГ Г¬ГЁ\n35 = ГІГіГ±ГЄГ«Г Гї ГЁ ГіГ­Г»Г«Г Гї ГЇГ®ГЈГ®Г¤Г  Гў ГЄГ®Г°ГЁГ·Г­ГҐГўГ»Гµ ГІГ®Г­Г Гµ\n36 Гў 38 = ГїГ°ГЄГ Гї ГЁ ГІГіГ¬Г Г­Г­Г Гї ГЇГ®ГЈГ®Г¤Г  Гў ГІГ®Г­Г Гµ Г ГЇГҐГ«ГјГ±ГЁГ­Г \n39 = Г®Г·ГҐГ­Гј ГїГ°ГЄГ Гї ГЇГ®ГЈГ®Г¤Г \n40 Гў 42 = Г­ГҐГїГ±Г­Г Гї ГЇГ®ГЈГ®Г¤Г  Гў ГЇГіГ°ГЇГіГ°Г­Г»Гµ/Г±ГЁГ­ГЁГµ Г¶ГўГҐГІГ Гµ\n43 = ГІВёГ¬Г­Г»ГҐ ГЁ ГҐГ¤ГЄГЁГҐ Г®ГЎГ«Г ГЄГ \n44 = Г·ВёГ°Г­Г®-ГЎГҐГ«Г®ГҐ Г­ГҐГЎГ®\n45 = ГЇГіГ°ГЇГіГ°Г­Г®ГҐ Г­ГҐГЎГ®")
 
 
 
@@ -780,38 +780,38 @@ function imgui.OnDrawFrame()
 
 
 
----------- Настройки Автореконнекта ----------
+---------- ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГЂГўГІГ®Г°ГҐГЄГ®Г­Г­ГҐГЄГІГ  ----------
     if autoreconnect_settings_window_state.v then
         imgui.SetNextWindowSize(imgui.ImVec2(290, 135), imgui.Cond.FirstUseEver)
         imgui.SetNextWindowPos(imgui.ImVec2(rx / 2, ry / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
 
-        imgui.Begin(u8"Настройки Авто-Реконнекта", autoreconnect_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
+        imgui.Begin(u8"ГЌГ Г±ГІГ°Г®Г©ГЄГЁ ГЂГўГІГ®-ГђГҐГЄГ®Г­Г­ГҐГЄГІГ ", autoreconnect_settings_window_state, imgui.WindowFlags.NoResize + imgui.WindowFlags.NoCollapse)
         imgui.BeginChild('##4', imgui.ImVec2(275, 100), false)
 
         imgui.PushItemWidth(100)
-        if imgui.InputInt(u8"Минимальная задержка", autoreconnect_min) then
+        if imgui.InputInt(u8"ГЊГЁГ­ГЁГ¬Г Г«ГјГ­Г Гї Г§Г Г¤ГҐГ°Г¦ГЄГ ", autoreconnect_min) then
             savecfg()
         end
         imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Указывается в секундах")
+        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Г“ГЄГ Г§Г»ГўГ ГҐГІГ±Гї Гў Г±ГҐГЄГіГ­Г¤Г Гµ")
 
         imgui.PushItemWidth(100)
-        if imgui.InputInt(u8"Максимальная задержка", autoreconnect_max) then
+        if imgui.InputInt(u8"ГЊГ ГЄГ±ГЁГ¬Г Г«ГјГ­Г Гї Г§Г Г¤ГҐГ°Г¦ГЄГ ", autoreconnect_max) then
             savecfg()
         end
         imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Указывается в секундах")
+        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Г“ГЄГ Г§Г»ГўГ ГҐГІГ±Гї Гў Г±ГҐГЄГіГ­Г¤Г Гµ")
         imgui.Separator()
 
         if imadd.ToggleButton('##5', autoreconnect_dont_reconnect) then
             savecfg()
         end
         imgui.SameLine()
-        imgui.Text(u8'Не переподключаться')
+        imgui.Text(u8'ГЌГҐ ГЇГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·Г ГІГјГ±Гї')
         imgui.SameLine()
-        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматическое переподключение не будет\nпроисходить в выбранный промежуток времени")
+        imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГЂГўГІГ®Г¬Г ГІГЁГ·ГҐГ±ГЄГ®ГҐ ГЇГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ Г­ГҐ ГЎГіГ¤ГҐГІ\nГЇГ°Г®ГЁГ±ГµГ®Г¤ГЁГІГј Гў ГўГ»ГЎГ°Г Г­Г­Г»Г© ГЇГ°Г®Г¬ГҐГ¦ГіГІГ®ГЄ ГўГ°ГҐГ¬ГҐГ­ГЁ")
 
-        imgui.Text(u8"От")
+        imgui.Text(u8"ГЋГІ")
         imgui.SameLine()
         imgui.PushItemWidth(50)
         if imgui.SliderInt('##6', autoreconnect_dont_reconnect_hour_first, 0, 23) then
@@ -819,7 +819,7 @@ function imgui.OnDrawFrame()
         end
         imgui.PopItemWidth()
         imgui.SameLine()
-        imgui.Text(u8"До")
+        imgui.Text(u8"Г„Г®")
         imgui.SameLine()
         imgui.PushItemWidth(50)
         if imgui.SliderInt('##7', autoreconnect_dont_reconnect_hour_second, 0, 23) then
@@ -827,19 +827,19 @@ function imgui.OnDrawFrame()
         end
         imgui.PopItemWidth()
         imgui.SameLine()
-        imgui.Text(u8"часов.")
+        imgui.Text(u8"Г·Г Г±Г®Гў.")
         imgui.EndChild()
         imgui.End()
     end
 
 
----------- Настройки Лавки ----------
+---------- ГЌГ Г±ГІГ°Г®Г©ГЄГЁ Г‹Г ГўГЄГЁ ----------
     if lavka_settings_window_state.v then
         lavka_settings()
     end
 
 
----------- Основное окно ----------
+---------- ГЋГ±Г­Г®ГўГ­Г®ГҐ Г®ГЄГ­Г® ----------
     if main_window_state.v then
         renderDrawBox(0, 0, rx, ry, 0x50030303)
 
@@ -850,22 +850,22 @@ function imgui.OnDrawFrame()
         imgui.BeginChild('##1', imgui.ImVec2(100, 240), false)
 
         imgui.SetCursorPos(imgui.ImVec2(30, 10))
-        imgui.Text(u8"Меню")
+        imgui.Text(u8"ГЊГҐГ­Гѕ")
         imgui.SetCursorPosY(30)
         imgui.Separator()
 
         imgui.SetCursorPos(imgui.ImVec2(5, 40))
-        if imgui.Button(fa.ICON_FA_ALIGN_JUSTIFY .. u8' Моды##20', imgui.ImVec2(90, 20)) then
+        if imgui.Button(fa.ICON_FA_ALIGN_JUSTIFY .. u8' ГЊГ®Г¤Г»##20', imgui.ImVec2(90, 20)) then
             selected_window = 1
         end
 
         imgui.SetCursorPos(imgui.ImVec2(5, 70))
-        if imgui.Button(fa.ICON_FA_KEYBOARD .. u8' Бинды##21', imgui.ImVec2(90, 20)) then
+        if imgui.Button(fa.ICON_FA_KEYBOARD .. u8' ГЃГЁГ­Г¤Г»##21', imgui.ImVec2(90, 20)) then
             selected_window = 2
         end
 
         imgui.SetCursorPos(imgui.ImVec2(5, 100))
-        if imgui.Button(fa.ICON_FA_KEYBOARD .. u8' Команды##56', imgui.ImVec2(90, 20)) then
+        if imgui.Button(fa.ICON_FA_KEYBOARD .. u8' ГЉГ®Г¬Г Г­Г¤Г»##56', imgui.ImVec2(90, 20)) then
             selected_window = 3
         end
 
@@ -876,8 +876,8 @@ function imgui.OnDrawFrame()
 
         imgui.SetCursorPos(imgui.ImVec2(10, 195))
         imgui.Separator()
-        imgui.Text(u8"Автор: Zenitrise")
-        imgui.Text(u8"Версия: " .. script_vers_text)
+        imgui.Text(u8"ГЂГўГІГ®Г°: Zenitrise")
+        imgui.Text(u8"Г‚ГҐГ°Г±ГЁГї: " .. script_vers_text)
 
         imgui.SetCursorPos(imgui.ImVec2(75, 215))
         if imgui.Button(fa.ICON_FA_SYNC_ALT , imgui.ImVec2(23, 20)) then
@@ -889,7 +889,7 @@ function imgui.OnDrawFrame()
 
         imgui.SameLine()
 
-        ---------- Модификации ----------
+        ---------- ГЊГ®Г¤ГЁГґГЁГЄГ Г¶ГЁГЁ ----------
         if selected_window == 1 then
             imgui.BeginChild('##2', imgui.ImVec2(255, 240), false) --------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -897,9 +897,9 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Авто-Лавка")
+            imgui.Text(u8"ГЂГўГІГ®-Г‹Г ГўГЄГ ")
             imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматически выбирает цвет и название лавки")
+            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГЂГўГІГ®Г¬Г ГІГЁГ·ГҐГ±ГЄГЁ ГўГ»ГЎГЁГ°Г ГҐГІ Г¶ГўГҐГІ ГЁ Г­Г Г§ГўГ Г­ГЁГҐ Г«Г ГўГЄГЁ")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##10") then
                 lavka_settings_window_state.v = not lavka_settings_window_state.v
@@ -909,7 +909,7 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Изменение времени и погоды")
+            imgui.Text(u8"Г€Г§Г¬ГҐГ­ГҐГ­ГЁГҐ ГўГ°ГҐГ¬ГҐГ­ГЁ ГЁ ГЇГ®ГЈГ®Г¤Г»")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##15") then
                 timechange_settings_window_state.v = not timechange_settings_window_state.v
@@ -919,7 +919,7 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Радиус лавок")
+            imgui.Text(u8"ГђГ Г¤ГЁГіГ± Г«Г ГўГ®ГЄ")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##2281733") then
                 rlavka_settings_window_state.v = not rlavka_settings_window_state.v 
@@ -929,7 +929,7 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8'Поиск лавок')
+            imgui.Text(u8'ГЏГ®ГЁГ±ГЄ Г«Г ГўГ®ГЄ')
             -----------
             -----------
             -------------
@@ -945,7 +945,7 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Активация скрипта на клавишу")
+            imgui.Text(u8"ГЂГЄГІГЁГўГ Г¶ГЁГї Г±ГЄГ°ГЁГЇГІГ  Г­Г  ГЄГ«Г ГўГЁГёГі")
             if imgui.HotKey("##23", main_window, _, 100) then
                 rkeys.changeHotKey(bind_main_window, main_window.v)
                 savecfg()
@@ -957,7 +957,7 @@ function imgui.OnDrawFrame()
         
             imgui.Text("/vcon")
             imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Подключение к выбранному серверу")
+            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГЏГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГЄ ГўГ»ГЎГ°Г Г­Г­Г®Г¬Гі Г±ГҐГ°ГўГҐГ°Гі")
 
             imgui.EndChild()
         elseif selected_window == 4 then
@@ -967,11 +967,11 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Авто-Реконнект")
+            imgui.Text(u8"ГЂГўГІГ®-ГђГҐГЄГ®Г­Г­ГҐГЄГІ")
             imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматически переподключает вас к серверу, если\nвы были от него отключены. Можно выбрать рандомную задержку.")
+            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГЂГўГІГ®Г¬Г ГІГЁГ·ГҐГ±ГЄГЁ ГЇГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·Г ГҐГІ ГўГ Г± ГЄ Г±ГҐГ°ГўГҐГ°Гі, ГҐГ±Г«ГЁ\nГўГ» ГЎГ»Г«ГЁ Г®ГІ Г­ГҐГЈГ® Г®ГІГЄГ«ГѕГ·ГҐГ­Г». ГЊГ®Г¦Г­Г® ГўГ»ГЎГ°Г ГІГј Г°Г Г­Г¤Г®Г¬Г­ГіГѕ Г§Г Г¤ГҐГ°Г¦ГЄГі.")
             imgui.SameLine()
-            if imgui.Button(fa.ICON_FA_COGS .. "##9 Настройки") then 
+            if imgui.Button(fa.ICON_FA_COGS .. "##9 ГЌГ Г±ГІГ°Г®Г©ГЄГЁ") then 
                 autoreconnect_settings_window_state.v = not autoreconnect_settings_window_state.v
             end 
 
@@ -979,13 +979,13 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Анти-Диалог с акциями")
+            imgui.Text(u8"ГЂГ­ГІГЁ-Г„ГЁГ Г«Г®ГЈ Г± Г ГЄГ¶ГЁГїГ¬ГЁ")
             
             if imadd.ToggleButton("##39", box_toggle) then
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Авто-Открытие сундуков")
+            imgui.Text(u8"ГЂГўГІГ®-ГЋГІГЄГ°Г»ГІГЁГҐ Г±ГіГ­Г¤ГіГЄГ®Гў")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##40") then
                 box_settings_window_state.v = not box_settings_window_state.v
@@ -996,9 +996,9 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Авто выбор спавна")
+            imgui.Text(u8"ГЂГўГІГ® ГўГ»ГЎГ®Г° Г±ГЇГ ГўГ­Г ")
             imgui.SameLine()
-            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"Автоматический выбор спавна, если вы\nиграете с ADD-VIP")
+            imgui.TextQuestion(fa.ICON_FA_QUESTION_CIRCLE, u8"ГЂГўГІГ®Г¬Г ГІГЁГ·ГҐГ±ГЄГЁГ© ГўГ»ГЎГ®Г° Г±ГЇГ ГўГ­Г , ГҐГ±Г«ГЁ ГўГ»\nГЁГЈГ°Г ГҐГІГҐ Г± ADD-VIP")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##17") then
                 addspawn_settings_window_state.v = not addspawn_settings_window_state.v
@@ -1009,7 +1009,7 @@ function imgui.OnDrawFrame()
                 savecfg()
             end
             imgui.SameLine()
-            imgui.Text(u8"Уведомления в Telegram")
+            imgui.Text(u8"Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГї Гў Telegram")
             imgui.SameLine()
             if imgui.Button(fa.ICON_FA_COGS .. "##60") then
                 tg_settings_window_state.v = not tg_settings_window_state.v
@@ -1021,7 +1021,7 @@ function imgui.OnDrawFrame()
         imgui.End()
     end
 end
--- Для бинда
+-- Г„Г«Гї ГЎГЁГ­Г¤Г 
 function main_window_activate()
     if hotkey_toggle.v then
         main_window_state.v = not main_window_state.v
@@ -1029,18 +1029,18 @@ function main_window_activate()
         alpha()
     end
 end
--- Изменение времени
+-- Г€Г§Г¬ГҐГ­ГҐГ­ГЁГҐ ГўГ°ГҐГ¬ГҐГ­ГЁ
 function setTime()
     setTimeOfDay(timechange_hours.v, timechange_minutes.v)
 end
 
--- Изменение погоды
+-- Г€Г§Г¬ГҐГ­ГҐГ­ГЁГҐ ГЇГ®ГЈГ®Г¤Г»
 function setWeather()
     local weather = tonumber(timechange_weather.v)
     forceWeatherNow(weather)
 end
 
--- Основная команда
+-- ГЋГ±Г­Г®ГўГ­Г Гї ГЄГ®Г¬Г Г­Г¤Г 
 function nhelp_cmd()
     main_window_state.v = not main_window_state.v
     imgui.Process = main_window_state.v
@@ -1049,21 +1049,21 @@ end
 
 function sampev.onServerMessage(color, text)
     if tg_toggle.v and tg_box.v then
-        if text:match("Вы использовали") and color == -65281 then
+        if text:match("Г‚Г» ГЁГ±ГЇГ®Г«ГјГ§Г®ГўГ Г«ГЁ") and color == -65281 then
             sendTelegramNotification(tag .. text)
         end
     end
 
     if tg_toggle.v and tg_cr.v then
-        if text:find("Вы купили") and color == -65281 then
+        if text:find("Г‚Г» ГЄГіГЇГЁГ«ГЁ") and color == -65281 then
             sendTelegramNotification(tag .. text)
-        elseif text:find("купил у вас") and color == -65281 then
+        elseif text:find("ГЄГіГЇГЁГ« Гі ГўГ Г±") and color == -65281 then
             sendTelegramNotification(tag .. text)
         end
     end
 
     if tg_toggle.v and tg_perevod.v then
-        if text:match("^Вам поступил перевод на ваш счет в размере $(%d+) от жителя (.-).%d+.") and color == -65281 then
+        if text:match("^Г‚Г Г¬ ГЇГ®Г±ГІГіГЇГЁГ« ГЇГҐГ°ГҐГўГ®Г¤ Г­Г  ГўГ Гё Г±Г·ГҐГІ Гў Г°Г Г§Г¬ГҐГ°ГҐ $(%d+) Г®ГІ Г¦ГЁГІГҐГ«Гї (.-).%d+.") and color == -65281 then
             sendTelegramNotification(tag .. text)
         end
     end
@@ -1071,7 +1071,7 @@ function sampev.onServerMessage(color, text)
     if tg_toggle.v and tg_payday.v then
         if text == '__________________________________________________________________________' and color == 1941201407 then
             paydaytext = paydaytext..'\n'..text
-            sendTelegramNotification('Прошел пейдей! Вот статистика за пейдей! \n' ..paydaytext)
+            sendTelegramNotification('ГЏГ°Г®ГёГҐГ« ГЇГҐГ©Г¤ГҐГ©! Г‚Г®ГІ Г±ГІГ ГІГЁГ±ГІГЁГЄГ  Г§Г  ГЇГҐГ©Г¤ГҐГ©! \n' ..paydaytext)
             paydaytext = ''
             return {color, text}
         end
@@ -1081,7 +1081,7 @@ function sampev.onServerMessage(color, text)
             return {color, text}
         end
         
-        if text == '______________________________Банковский чек______________________________' and color == 1941201407 then
+        if text == '______________________________ГЃГ Г­ГЄГ®ГўГ±ГЄГЁГ© Г·ГҐГЄ______________________________' and color == 1941201407 then
             paydaytext = paydaytext..'\n'..text
         end
     end
@@ -1090,7 +1090,7 @@ end
 
 
 
------ Авто лавка и автоспавн
+----- ГЂГўГІГ® Г«Г ГўГЄГ  ГЁ Г ГўГІГ®Г±ГЇГ ГўГ­
 function sampev.onShowDialog(id, style, title, b1, b2, text)
     if lavka_toggle.v then
         lua_thread.create(function()
@@ -1109,26 +1109,26 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
     end
 
     if anti_stock.v then
-        if title:find("Акции на") then
+        if title:find("ГЂГЄГ¶ГЁГЁ Г­Г ") then
             return false
         end
     end
 
-    if id == 25526 then
+    if id == 25527 then
         if addspawn_toggle.v then
             if addspawn_waittoggle.v then
                 lua_thread.create(function()
                     local a = addspawn_id.v-1
                     time = addspawn_wait.v * 1000
                     wait(time)
-                    sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
-                    sampSendDialogResponse(25526, 1, a, _)
+                    sampAddChatMessage(tag .. textcolor .. "Г‚Г»ГЎГЁГ°Г Гѕ " .. warncolor .. addspawn_id.v .. textcolor .. " ГЇГіГ­ГЄГІ.", tagcolor)
+                    sampSendDialogResponse(25527, 1, a, _)
                     sampCloseCurrentDialogWithButton(0)
                 end)
             elseif not addspawn_waittoggle.v then 
                 local a = addspawn_id.v-1
-                sampSendDialogResponse(25526, 1, a, _)
-                sampAddChatMessage(tag .. textcolor .. "Выбираю " .. warncolor .. addspawn_id.v .. textcolor .. " пункт.", tagcolor)
+                sampSendDialogResponse(25527, 1, a, _)
+                sampAddChatMessage(tag .. textcolor .. "Г‚Г»ГЎГЁГ°Г Гѕ " .. warncolor .. addspawn_id.v .. textcolor .. " ГЇГіГ­ГЄГІ.", tagcolor)
             end
         end
     end 
@@ -1143,7 +1143,7 @@ function sampev.onShowDialog(id, style, title, b1, b2, text)
                     ""
                 }
                 stata = false
-                for line in text:gmatch("[^\n]+") do -- разбиваем чтобы искать по строкам
+                for line in text:gmatch("[^\n]+") do -- Г°Г Г§ГЎГЁГўГ ГҐГ¬ Г·ГІГ®ГЎГ» ГЁГ±ГЄГ ГІГј ГЇГ® Г±ГІГ°Г®ГЄГ Г¬
                     table.insert(stats, line)
                 end
                 wait(0)
@@ -1155,7 +1155,7 @@ end
 
 function sampev.onSetObjectMaterialText(id, data)
     
-    if data.text:find('Номер %d+%. {......}Свободная!') then
+    if data.text:find('ГЌГ®Г¬ГҐГ° %d+%. {......}Г‘ГўГ®ГЎГ®Г¤Г­Г Гї!') then
         local object = sampGetObjectHandleBySampId(id) 
         table.insert(lavki, object)
     else
@@ -1178,7 +1178,7 @@ function sampev.onDestroyObject(id)
 end
 
 
------- Сохранение
+------ Г‘Г®ГµГ°Г Г­ГҐГ­ГЁГҐ
 function savecfg()
     cfg_part_1()
     cfg_part_2()
@@ -1244,7 +1244,7 @@ end
 
 function onReceivePacket(id)
     if (id == 32 or id == 37) and tg_disconnect.v then 
-        sendTelegramNotification("Вы были отключены от сервера!")
+        sendTelegramNotification("Г‚Г» ГЎГ»Г«ГЁ Г®ГІГЄГ«ГѕГ·ГҐГ­Г» Г®ГІ Г±ГҐГ°ГўГҐГ°Г !")
     end
     
     if (id == 32 or id == 37) and autoreconnect_toggle.v then
@@ -1252,7 +1252,7 @@ function onReceivePacket(id)
             local ip, port = sampGetCurrentServerAddress()
             math.randomseed(os.clock())
             local a = math.random(autoreconnect_min.v, autoreconnect_max.v)
-            sampAddChatMessage(tag .. textcolor .. 'Задержка на подключение: '.. warncolor .. a .. textcolor .. ' секунд.', tagcolor)
+            sampAddChatMessage(tag .. textcolor .. 'Г‡Г Г¤ГҐГ°Г¦ГЄГ  Г­Г  ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ: '.. warncolor .. a .. textcolor .. ' Г±ГҐГЄГіГ­Г¤.', tagcolor)
             wait(a * 1000)
 
             local canreconnecthr = true
@@ -1267,7 +1267,7 @@ function onReceivePacket(id)
                 ip,port = sampGetCurrentServerAddress()
                 sampConnectToServer(ip, port)
             else
-                sampAddChatMessage(tag .. textcolor .. "Нельзя в это время!", tagcolor)
+                sampAddChatMessage(tag .. textcolor .. "ГЌГҐГ«ГјГ§Гї Гў ГЅГІГ® ГўГ°ГҐГ¬Гї!", tagcolor)
             end
         end)
     end
@@ -1330,25 +1330,25 @@ function encodeUrl(str)
     return u8:encode(str, 'CP1251')
 end
 
-function sendTelegramNotification(msg) -- функция для отправки сообщения юзеру
-    msg = msg:gsub('{......}', '') --тут типо убираем цвет
-    msg = encodeUrl(msg) -- ну тут мы закодируем строку
-    async_http_request('https://api.telegram.org/bot' .. token.v .. '/sendMessage?chat_id=' .. chat_id.v .. '&text='..msg,'', function(result) end) -- а тут уже отправка
+function sendTelegramNotification(msg) -- ГґГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г®ГІГЇГ°Г ГўГЄГЁ Г±Г®Г®ГЎГ№ГҐГ­ГЁГї ГѕГ§ГҐГ°Гі
+    msg = msg:gsub('{......}', '') --ГІГіГІ ГІГЁГЇГ® ГіГЎГЁГ°Г ГҐГ¬ Г¶ГўГҐГІ
+    msg = encodeUrl(msg) -- Г­Гі ГІГіГІ Г¬Г» Г§Г ГЄГ®Г¤ГЁГ°ГіГҐГ¬ Г±ГІГ°Г®ГЄГі
+    async_http_request('https://api.telegram.org/bot' .. token.v .. '/sendMessage?chat_id=' .. chat_id.v .. '&text='..msg,'', function(result) end) -- Г  ГІГіГІ ГіГ¦ГҐ Г®ГІГЇГ°Г ГўГЄГ 
 end
 
-function get_telegram_updates() -- функция получения сообщений от юзера
-    while not updateid do wait(1) end -- ждем пока не узнаем последний ID
+function get_telegram_updates() -- ГґГіГ­ГЄГ¶ГЁГї ГЇГ®Г«ГіГ·ГҐГ­ГЁГї Г±Г®Г®ГЎГ№ГҐГ­ГЁГ© Г®ГІ ГѕГ§ГҐГ°Г 
+    while not updateid do wait(1) end -- Г¦Г¤ГҐГ¬ ГЇГ®ГЄГ  Г­ГҐ ГіГ§Г­Г ГҐГ¬ ГЇГ®Г±Г«ГҐГ¤Г­ГЁГ© ID
     local runner = requestRunner()
     local reject = function() end
     local args = ''
     while true do
-        url = 'https://api.telegram.org/bot'..token.v ..'/getUpdates?chat_id='..chat_id.v ..'&offset=-1' -- создаем ссылку
+        url = 'https://api.telegram.org/bot'..token.v ..'/getUpdates?chat_id='..chat_id.v ..'&offset=-1' -- Г±Г®Г§Г¤Г ГҐГ¬ Г±Г±Г»Г«ГЄГі
         threadHandle(runner, url, args, processing_telegram_messages, reject)
         wait(0)
     end
 end
 
-function processing_telegram_messages(result) -- функция проверОчки того что отправил чел
+function processing_telegram_messages(result) -- ГґГіГ­ГЄГ¶ГЁГї ГЇГ°Г®ГўГҐГ°ГЋГ·ГЄГЁ ГІГ®ГЈГ® Г·ГІГ® Г®ГІГЇГ°Г ГўГЁГ« Г·ГҐГ«
     if result then
         local proc_table = decodeJson(result)
         if proc_table.ok then
@@ -1359,32 +1359,32 @@ function processing_telegram_messages(result) -- функция проверОчки того что отп
                         updateid = res_table.update_id
                         local message_from_user = res_table.message.text
                         if message_from_user then
-                            -- и тут если чел отправил текст мы сверяем
-                            local text = u8:decode(message_from_user) .. ' ' --добавляем в конец пробел дабы не произошли тех. шоколадки с командами(типо чтоб !q не считалось как !qq)
+                            -- ГЁ ГІГіГІ ГҐГ±Г«ГЁ Г·ГҐГ« Г®ГІГЇГ°Г ГўГЁГ« ГІГҐГЄГ±ГІ Г¬Г» Г±ГўГҐГ°ГїГҐГ¬
+                            local text = u8:decode(message_from_user) .. ' ' --Г¤Г®ГЎГ ГўГ«ГїГҐГ¬ Гў ГЄГ®Г­ГҐГ¶ ГЇГ°Г®ГЎГҐГ« Г¤Г ГЎГ» Г­ГҐ ГЇГ°Г®ГЁГ§Г®ГёГ«ГЁ ГІГҐГµ. ГёГ®ГЄГ®Г«Г Г¤ГЄГЁ Г± ГЄГ®Г¬Г Г­Г¤Г Г¬ГЁ(ГІГЁГЇГ® Г·ГІГ®ГЎ !q Г­ГҐ Г±Г·ГЁГІГ Г«Г®Г±Гј ГЄГ ГЄ !qq)
                             if text:match("^/help") then
                                 local arr = {
-                                    'Список команд:',
+                                    'Г‘ГЇГЁГ±Г®ГЄ ГЄГ®Г¬Г Г­Г¤:',
                                     "",
-                                    '/rec  -->  Переподключиться к серверу',
+                                    '/rec  -->  ГЏГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·ГЁГІГјГ±Гї ГЄ Г±ГҐГ°ГўГҐГ°Гі',
                                     "",
-                                    "/help  -->  Помощь по командам",
+                                    "/help  -->  ГЏГ®Г¬Г®Г№Гј ГЇГ® ГЄГ®Г¬Г Г­Г¤Г Г¬",
                                     "",
-                                    "/off  -->  Выключить компьютер",
+                                    "/off  -->  Г‚Г»ГЄГ«ГѕГ·ГЁГІГј ГЄГ®Г¬ГЇГјГѕГІГҐГ°",
                                     "",
-                                    "/stats  -->  Статистика со /stats",
+                                    "/stats  -->  Г‘ГІГ ГІГЁГ±ГІГЁГЄГ  Г±Г® /stats",
                                     "",
-                                    "/reload  -->  Перезагрузить скрипт",
+                                    "/reload  -->  ГЏГҐГ°ГҐГ§Г ГЈГ°ГіГ§ГЁГІГј Г±ГЄГ°ГЁГЇГІ",
                                     "",
-                                    "/unload  -->  Отключить скрипт"
+                                    "/unload  -->  ГЋГІГЄГ«ГѕГ·ГЁГІГј Г±ГЄГ°ГЁГЇГІ"
                                 }
                                 sendTelegramNotification(table.concat(arr, "\n"))
                             elseif text:match("^/rec") then
-                                sendTelegramNotification(tag .. "Переподключение к серверу..")
+                                sendTelegramNotification(tag .. "ГЏГҐГ°ГҐГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГЄ Г±ГҐГ°ГўГҐГ°Гі..")
                                 lua_thread.create(function()
                                     sampSetGamestate(5)
                                     delay = 0
                                     local ip, port = sampGetCurrentServerAddress()
-                                    sampAddChatMessage(tag .. textcolor .. 'Задержка: '.. warncolor .. delay .. textcolor ..' сек.', tagcolor)
+                                    sampAddChatMessage(tag .. textcolor .. 'Г‡Г Г¤ГҐГ°Г¦ГЄГ : '.. warncolor .. delay .. textcolor ..' Г±ГҐГЄ.', tagcolor)
                                     wait(delay * 1000)
                                     sampConnectToServer(ip, port)
                                 end)
@@ -1398,25 +1398,25 @@ function processing_telegram_messages(result) -- функция проверОчки того что отп
                                 sendTelegramNotification(table.concat(stats, "\n"))
                             elseif text:match("^/off") then
                                 really = 1
-                                sendTelegramNotification(tag .. "Вы серьезно ходите выключить компьютер? Если да, то введите: /shutdown_my_pc\nЕсли вы передумали, то введите любую команду.")
+                                sendTelegramNotification(tag .. "Г‚Г» Г±ГҐГ°ГјГҐГ§Г­Г® ГµГ®Г¤ГЁГІГҐ ГўГ»ГЄГ«ГѕГ·ГЁГІГј ГЄГ®Г¬ГЇГјГѕГІГҐГ°? Г…Г±Г«ГЁ Г¤Г , ГІГ® ГўГўГҐГ¤ГЁГІГҐ: /shutdown_my_pc\nГ…Г±Г«ГЁ ГўГ» ГЇГҐГ°ГҐГ¤ГіГ¬Г Г«ГЁ, ГІГ® ГўГўГҐГ¤ГЁГІГҐ Г«ГѕГЎГіГѕ ГЄГ®Г¬Г Г­Г¤Гі.")
                             elseif text:match("^/shutdown_my_pc") then
                                 if really == 1 then
-                                    sendTelegramNotification(tag .. 'Выключаю компьютер через 5 секунд..')
+                                    sendTelegramNotification(tag .. 'Г‚Г»ГЄГ«ГѕГ·Г Гѕ ГЄГ®Г¬ГЇГјГѕГІГҐГ° Г·ГҐГ°ГҐГ§ 5 Г±ГҐГЄГіГ­Г¤..')
                                     wait(5000)
                                     os.execute('shutdown -s -t 0')
                                 else 
-                                    sendTelegramNotification(tag .. 'Неизвестная команда! Введите /help')
+                                    sendTelegramNotification(tag .. 'ГЌГҐГЁГ§ГўГҐГ±ГІГ­Г Гї ГЄГ®Г¬Г Г­Г¤Г ! Г‚ГўГҐГ¤ГЁГІГҐ /help')
                                 end
 
                             elseif text:match("^/unload") then
-                                sendTelegramNotification(tag .. "Скрипт был успешно выгружен!")
+                                sendTelegramNotification(tag .. "Г‘ГЄГ°ГЁГЇГІ ГЎГ»Г« ГіГ±ГЇГҐГёГ­Г® ГўГ»ГЈГ°ГіГ¦ГҐГ­!")
                                 thisScript():unload()
                             elseif text:match("^/reload") then
-                                sendTelegramNotification(tag .. "Скрипт был успешно перезагружен!")
+                                sendTelegramNotification(tag .. "Г‘ГЄГ°ГЁГЇГІ ГЎГ»Г« ГіГ±ГЇГҐГёГ­Г® ГЇГҐГ°ГҐГ§Г ГЈГ°ГіГ¦ГҐГ­!")
                                 thisScript():reload()
-                            else -- если же не найдется ни одна из команд выше, выведем сообщение
+                            else -- ГҐГ±Г«ГЁ Г¦ГҐ Г­ГҐ Г­Г Г©Г¤ГҐГІГ±Гї Г­ГЁ Г®Г¤Г­Г  ГЁГ§ ГЄГ®Г¬Г Г­Г¤ ГўГ»ГёГҐ, ГўГ»ГўГҐГ¤ГҐГ¬ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ
                                 really = 0
-                                sendTelegramNotification(tag .. 'Неизвестная команда! Введите /help')
+                                sendTelegramNotification(tag .. 'ГЌГҐГЁГ§ГўГҐГ±ГІГ­Г Гї ГЄГ®Г¬Г Г­Г¤Г ! Г‚ГўГҐГ¤ГЁГІГҐ /help')
                             end
                         end
                     end
@@ -1426,7 +1426,7 @@ function processing_telegram_messages(result) -- функция проверОчки того что отп
     end
 end
 
-function getLastUpdate() -- тут мы получаем последний ID сообщения, если же у вас в коде будет настройка токена и chat_id, вызовите эту функцию для того чтоб получить последнее сообщение
+function getLastUpdate() -- ГІГіГІ Г¬Г» ГЇГ®Г«ГіГ·Г ГҐГ¬ ГЇГ®Г±Г«ГҐГ¤Г­ГЁГ© ID Г±Г®Г®ГЎГ№ГҐГ­ГЁГї, ГҐГ±Г«ГЁ Г¦ГҐ Гі ГўГ Г± Гў ГЄГ®Г¤ГҐ ГЎГіГ¤ГҐГІ Г­Г Г±ГІГ°Г®Г©ГЄГ  ГІГ®ГЄГҐГ­Г  ГЁ chat_id, ГўГ»Г§Г®ГўГЁГІГҐ ГЅГІГі ГґГіГ­ГЄГ¶ГЁГѕ Г¤Г«Гї ГІГ®ГЈГ® Г·ГІГ®ГЎ ГЇГ®Г«ГіГ·ГЁГІГј ГЇГ®Г±Г«ГҐГ¤Г­ГҐГҐ Г±Г®Г®ГЎГ№ГҐГ­ГЁГҐ
     async_http_request('https://api.telegram.org/bot'..token.v ..'/getUpdates?chat_id='..chat_id.v ..'&offset=-1','',function(result)
         if result then
             local proc_table = decodeJson(result)
@@ -1437,7 +1437,7 @@ function getLastUpdate() -- тут мы получаем последний ID сообщения, если же у ва
                         updateid = res_table.update_id
                     end
                 else
-                    updateid = 1 -- тут зададим значение 1, если таблица будет пустая
+                    updateid = 1 -- ГІГіГІ Г§Г Г¤Г Г¤ГЁГ¬ Г§Г­Г Г·ГҐГ­ГЁГҐ 1, ГҐГ±Г«ГЁ ГІГ ГЎГ«ГЁГ¶Г  ГЎГіГ¤ГҐГІ ГЇГіГ±ГІГ Гї
                 end
             end
         end
@@ -1547,7 +1547,7 @@ function sampev.onShowTextDraw(id, data)
     end    
 end
 
--- Альфа
+-- ГЂГ«ГјГґГ 
 function alpha()
     lua_thread.create(function()
         if falpha > 0 then
@@ -1562,7 +1562,7 @@ function alpha()
     end)
 end
 
--- Тема
+-- Г’ГҐГ¬Г 
 function theme()
     imgui.SwitchContext()
     local style = imgui.GetStyle()
